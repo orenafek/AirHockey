@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace AirHockeyApp
 {
@@ -32,6 +33,13 @@ namespace AirHockeyApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
+
+        public static MobileServiceClient MobileService = new MobileServiceClient("http://localhost:59483");
+        // Use this constructor instead after publishing to the cloud
+        // public static MobileServiceClient MobileService = new MobileServiceClient(
+        //      "https://airhockeymobileservice.azure-mobile.net/",
+        //      "oFXUeQfzLuYFVHtraeoffZRnuJSaHl45"
+        //);
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

@@ -22,7 +22,7 @@ namespace AirHockeyApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        bool _button1Pressed = false;
+        bool _firstTime = true;
         public MainPage()
         {
             this.InitializeComponent();
@@ -30,8 +30,18 @@ namespace AirHockeyApp
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            _button1.Content = (_button1Pressed ? "Kaki Gadol" : "Pipi");
-            _button1Pressed = !_button1Pressed;
+            if (_firstTime)
+            {
+                _tb1.Text = "Super Gay !!!";
+                _btn1.Content = "Really ?";
+                _firstTime = false;
+            }
+
+            else
+            {
+               
+                _tb1.Text = "Mekabel Ba Tahat <=====8";
+            }
         }
     }
 }
