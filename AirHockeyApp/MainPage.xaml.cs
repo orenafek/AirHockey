@@ -30,7 +30,7 @@ namespace AirHockeyApp
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            _button1.Content = (_button1Pressed ? "Kaki" : "Pipi");
+            _button1.Content = (_button1Pressed ? "Kaki Gadol" : "Pipi");
             _button1Pressed = !_button1Pressed;
         }
     }
