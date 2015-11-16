@@ -46,10 +46,10 @@ namespace AirHockeyMobileService
             return null;
 
         }
-    
 
-    public static void updateUser(int userID)
-    {
+
+        public static void updateUser(int userID)
+        {
             _cmd = _conn.CreateCommand();
             _cmd.CommandText = "UPDATE Users SET id='a' AND Pass='999' WHERE id='77'";
 
@@ -57,20 +57,20 @@ namespace AirHockeyMobileService
             {
                 _conn.Open();
                 _cmd.ExecuteNonQuery();
-                
             }
 
-            catch(SqlException e)
+            catch (SqlException e)
             {
 
             }
 
             finally
             {
-                if(_conn.State == ConnectionState.Open)
+                if (_conn.State == ConnectionState.Open)
                 {
                     _conn.Close();
                 }
             }
+        }
     }
 }
