@@ -220,7 +220,12 @@
     <Compile Include="ADO_Data_Service.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PlayerRankController.cs" />
+    <Compile Include="DataObjects\Player.cs" />
+    <Compile Include="DataObjects\PlayerRank.cs" />
+    <Compile Include="DataObjects\PlayerRankDto.cs" />
+    <Compile Include="DataObjects\PlayerScore.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">

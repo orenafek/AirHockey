@@ -41,6 +41,10 @@ namespace AirHockeyMobileService.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public System.Data.Entity.DbSet<Leaderboard.DataObjects.Player> Players { get; set; }
+
+        public System.Data.Entity.DbSet<Leaderboard.DataObjects.PlayerRank> PlayerRanks { get; set; }
     }
 
 }
