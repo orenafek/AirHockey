@@ -34,12 +34,12 @@ namespace AirHockeyApp
             this.Suspending += OnSuspending;
         }
 
-        public static MobileServiceClient MobileService = new MobileServiceClient("http://localhost:59483");
+        //public static MobileServiceClient MobileService = new MobileServiceClient("http://localhost:59483");
         // Use this constructor instead after publishing to the cloud
-        // public static MobileServiceClient MobileService = new MobileServiceClient(
-        //      "https://airhockeymobileservice.azure-mobile.net/",
-        //      "oFXUeQfzLuYFVHtraeoffZRnuJSaHl45"
-        //);
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+              "https://airhockeymobileservice.azure-mobile.net/",
+              "oFXUeQfzLuYFVHtraeoffZRnuJSaHl45"
+        );
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -81,7 +81,7 @@ namespace AirHockeyApp
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(ScoreBoard), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

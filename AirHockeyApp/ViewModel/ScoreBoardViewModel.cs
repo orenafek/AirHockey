@@ -111,16 +111,16 @@ namespace AirHockeyApp.ViewModel
             finally { isPending = false; }
         }
 
-        public async Task SubmitScroeAsync(Player player, int score)
+        public async Task SubmitReusltAsync(Player player, int playerScore, int robotScore)
         {
             isPending = true;
             ErrorMessege = null;
 
-            PlayerScore playerScore = new PlayerScore { ID = player.ID, Score = score };
+            PlayerResult playerResult = new PlayerResult { Id = player.Id, PlayerScore = playerScore, RobotScore = robotScore };
 
             try
             {
-                await _client.InvokeApiAsync<PlayerScore, object>("Score", playerScore);
+                await _client.InvokeApiAsync<PlayerResult, object>("Result", playerResult);
                 await GetAllRanksAsync();
             }
 

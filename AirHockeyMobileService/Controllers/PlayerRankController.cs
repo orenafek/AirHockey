@@ -52,28 +52,28 @@ namespace AirHockeyMobileService.Controllers
             return SingleResult.Create(result);
         }
 
-        [Route("api/score")]
-        public async Task<IHttpActionResult> PostPlayerResult(PlayerResult score)
+        [Route("api/result")]
+        public async Task<IHttpActionResult> PostPlayerResult(PlayerResult result)
         {
             // Does this player exist?
-            var count = context.Players.Where(x => x.Id == score.PlayerId).Count();
+            var count = context.Players.Where(x => x.Id == result.PlayerId).Count();
             if (count < 1)
             {
                 return BadRequest();
             }
 
             // Try to find the PlayerRank entity for this player. If not found, create a new one.
-            PlayerRank rank = await context.PlayerRanks.FindAsync(score.PlayerId);
+            PlayerRank rank = await context.PlayerRanks.FindAsync(result.PlayerId);
             if (rank == null)
             {
-                rank = new PlayerRank { Id = score.PlayerId, Wins = 0 };
-                if (score.RobotScore < score.PlayerScore)
+                rank = new PlayerRank { Id = result.PlayerId, Wins = 0 };
+                if (result.RobotScore < result.PlayerScore)
                     ++rank.Wins;
                 context.PlayerRanks.Add(rank);
             }
             else
             {
-                if (score.RobotScore < score.PlayerScore)
+                if (result.RobotScore < result.PlayerScore)
                     ++rank.Wins;
             }
 

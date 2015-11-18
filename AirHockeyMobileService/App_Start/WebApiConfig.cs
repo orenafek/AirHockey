@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Web.Http;
-using AirHockeyMobileService.DataObjects;
 using AirHockeyMobileService.Models;
 using Microsoft.WindowsAzure.Mobile.Service;
+using Leaderboard.DataObjects;
 
 namespace AirHockeyMobileService
 {
@@ -31,15 +31,16 @@ namespace AirHockeyMobileService
     {
         protected override void Seed(MobileServiceContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+            List<Player> players = new List<Player>
             {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+                new Player { Id = Guid.NewGuid().ToString(), FirstName = "Amit", LastName = "Ohayon" },
+                new Player { Id = Guid.NewGuid().ToString(), FirstName = "Amir", LastName = "Sagiv" },
+                new Player { Id = Guid.NewGuid().ToString(), FirstName = "Oren", LastName = "Afek" }
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (Player player in players)
             {
-                context.Set<TodoItem>().Add(todoItem);
+                context.Set<Player>().Add(player);
             }
 
             base.Seed(context);
