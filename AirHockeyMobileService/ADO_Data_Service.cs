@@ -43,8 +43,7 @@ namespace AirHockeyMobileService
                 return null;
             }
 
-            return null;
-
+            
         }
 
 
