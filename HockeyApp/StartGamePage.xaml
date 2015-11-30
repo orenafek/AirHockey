@@ -23,11 +23,11 @@
             <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
             <StackPanel x:Name="NamePanel" Grid.Row="2">
                 <TextBlock Text="Air Hockey App" Margin="0,0,0,40"/>
-                <TextBlock Text="Please enter your full name:"/>
+                <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center"/>
                 <StackPanel x:Name="inputPanel" Orientation="Vertical" Margin="0,20,0,20" HorizontalAlignment="Center">
-                    <TextBox x:Name="nameInput" Width="280" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="nameInput" Width="280" HorizontalAlignment="Left" Text="" PlaceholderText="Enter Your Name Here."  TextChanging="NameInput_OnTextChanging"/>
                     <Button x:Name="inputButton" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" Margin="0,15,0,0" Content="Submit" Click="ButtonClick" Height="40"
-                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="42.667"/>
+                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="42.667" IsEnabled="False"/>
                 </StackPanel>
             </StackPanel>
             <Canvas x:Name="ChooseTimeOrScore" Grid.Row="2" Visibility="Collapsed">
