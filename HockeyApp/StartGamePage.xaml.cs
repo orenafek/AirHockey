@@ -33,11 +33,10 @@ namespace HockeyApp
             // if text is valid
             //this.Frame.Navigate(typeof(MainMenu), nameInput.Text);
             //else
-            Utils.Show("Invalid name, please enter again", new List<UICommand> { new UICommand("Close") });
-        
-
-
-            //greetingOutput.Text = "Hello, " + nameInput.Text + "! Press the button to start a game.";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(nameInput.Text, "^[a-zA-Z]+([ ][a-zA-Z]+)*$"))
+                Utils.Show("Invalid name, please enter again", new List<UICommand> { new UICommand("Close") });
+            else
+                greetingOutput.Text = "Hello, " + nameInput.Text + "! Press the button to start a game.";
 
         }
 
