@@ -18,17 +18,29 @@
                 <RowDefinition Height="14*"></RowDefinition>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="UpperPadding" Grid.Row="0" Text="Up"></TextBlock>
-            <TextBlock x:Name="lowerPadding" Grid.Row ="3" Text="Down"></TextBlock>
-            <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="0,0,0,0"/>
+            <TextBlock x:Name="UpperPadding" Grid.Row="0"></TextBlock>
+            <TextBlock x:Name="lowerPadding" Grid.Row ="3"></TextBlock>
+            <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
             <Canvas Grid.Row="2">
                 <Canvas.Resources>
                     
                 </Canvas.Resources>
-                <Button x:Name="BtnGame" Content="התחל משחק" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White"></Button>
-                <Button x:Name="BtnScoreBoard" Content="התחל משחק" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White"></Button>
+                <Button x:Name="BtnGame" Content="התחל משחק" Height="100" Width="250"
+                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White" Click="BtnGame_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="Assets/PlayButton.png"></Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="BtnScoreBoard" Content="טבלת שיאים" Height="100" Width="250" 
+                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White" Click="BtnScoreBoard_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="Assets/ScoreboardButton.png"></Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Canvas>
         </Grid>
     </Grid>

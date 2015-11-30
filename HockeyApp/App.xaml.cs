@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,14 +31,30 @@ namespace HockeyApp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
         }
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        { 
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack && backRequestedEventArgs.Handled == false)
+            {
+                backRequestedEventArgs.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
+    /// <summary>
+    /// Invoked when the application is launched normally by the end user.  Other entry points
+    /// will be used such as when the application is launched to open a specific file.
+    /// </summary>
+    /// <param name="e">Details about the launch request and process.</param>
+    protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
 #if DEBUG
@@ -56,6 +73,7 @@ namespace HockeyApp
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
+                rootFrame.Navigated += OnNavigated;
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -67,6 +85,11 @@ namespace HockeyApp
                 Window.Current.Content = rootFrame;
             }
 
+        SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+            rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            
+        
             if (rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
@@ -100,6 +123,15 @@ namespace HockeyApp
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            // Each time a navigation event occurs, update the back button's visibillity
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame) sender).CanGoBack
+                    ? AppViewBackButtonVisibility.Visible
+                    : AppViewBackButtonVisibility.Collapsed;
         }
     }
 }

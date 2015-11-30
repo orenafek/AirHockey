@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace HockeyApp
 {
@@ -19,6 +23,21 @@ namespace HockeyApp
             message.DefaultCommandIndex = defaultCommandIndex;
             message.CancelCommandIndex = cancelCommandIndex;
             await message.ShowAsync();
+        }
+
+        public static void EnableNavigateButton()
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            string myPages = "";
+            foreach (PageStackEntry page in rootFrame.BackStack)
+            {
+                myPages += page.SourcePageType.ToString() + "\n";
+            }
+            //stackCount.Text = myPages;
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
     }
 }
