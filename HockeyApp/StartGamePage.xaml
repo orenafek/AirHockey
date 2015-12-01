@@ -23,7 +23,7 @@
             <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
             <StackPanel x:Name="NamePanel" Grid.Row="2">
                 
-                <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center"/>
+                <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center" FontFamily="Global Monospace" FontSize="18.667"/>
                 <StackPanel x:Name="inputPanel" Orientation="Vertical" Margin="0,20,0,20" HorizontalAlignment="Center">
                     <TextBox x:Name="nameInput" Width="280" HorizontalAlignment="Left" Text="" PlaceholderText="Enter Your Name Here."  TextChanging="NameInput_OnTextChanging"/>
                     <Button x:Name="inputButton" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" Margin="0,15,0,0" Content="Submit" Click="ButtonClick" Height="40"
@@ -34,11 +34,11 @@
                 <Canvas.Resources>
 
                 </Canvas.Resources>
-                <TextBlock x:Name="greetingOutput"/>
-                <Button x:Name="BtnGame" Content="Limit by Time" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White"></Button>
-                <Button x:Name="BtnScoreBoard" Content="Limit by Score" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White"></Button>
+                <TextBlock x:Name="tb_greetingOutput"/>
+                <Button x:Name="btn_byTime" Content="Limit by Time" Height="100" Width="250" 
+                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White" Click="BtnOption_OnClick" ></Button>
+                <Button x:Name="btn_byScore" Content="Limit by Score" Height="100" Width="250" 
+                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White" Click="BtnOption_OnClick"></Button>
             </Canvas>
         </Grid>
     </Grid>

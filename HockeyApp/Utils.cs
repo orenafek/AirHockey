@@ -11,6 +11,30 @@ using Windows.UI.Xaml.Navigation;
 
 namespace HockeyApp
 {
+    public class Session
+    {
+        public Session(bool byScore, string playerName)
+        {
+            ByScore = byScore;
+            PlayerName = playerName;
+        }
+
+        public Session(Session other)
+        {
+            ByScore = other.ByScore;
+            PlayerName = other.PlayerName;
+        }
+
+        public bool ByScore { get; set; }
+
+        public bool ByTime
+        {
+            get { return !ByScore; }
+            set { ByScore = !value; }
+        }
+
+        public string PlayerName { get; set; }
+    }
     public class Utils
     {
         public static async void Show(string text, List<UICommand> commands, uint defaultCommandIndex = 0, uint cancelCommandIndex = 0)

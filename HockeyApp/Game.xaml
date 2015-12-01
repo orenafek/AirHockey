@@ -18,23 +18,44 @@
             <TextBlock x:Name="UpperPadding" Grid.Row="0" Text=""></TextBlock>
             <TextBlock x:Name="lowerPadding" Grid.Row ="3" Text=""></TextBlock>
             <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
-            <Canvas Grid.Row="2" >
-                <TextBlock x:Name="textBlock" Canvas.Left="43" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="59" Height="97" Width="281"/>
-                <Image x:Name="scoreTable" Grid.Row ="2" Source="Assets/ScoreTable.PNG" HorizontalAlignment="Stretch" Canvas.Left="43" Canvas.Top="211"/>
-                <TextBlock x:Name="Robot" Canvas.Left="188" TextWrapping="Wrap" Canvas.Top="216" Height="33" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="48" TextAlignment="Center">
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="textBlock" Grid.Row="0" Canvas.Left="43" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="59" Height="97" Width="281"/>
+                <Grid Grid.Row="1" Margin="20,0,20,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*" />
+                        <RowDefinition Height="75*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="Red" BorderThickness="3" />
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Red" BorderThickness="3" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Red" BorderThickness="3" />
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Red" BorderThickness="3" />
+                    <TextBlock x:Name="Robot" Grid.Row ="0" Grid.Column="1" TextWrapping="Wrap" Canvas.Top="216" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="48" TextAlignment="Center" >
                 	<Run FontSize="40" Text="Robot"/>
                 	<LineBreak/>
                 	<Run FontSize="42.667" Text="obot"/>
-                </TextBlock>
-                <TextBlock x:Name="UserScore" Canvas.Left="43" TextWrapping="Wrap" Text="3" Canvas.Top="249" Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center"/>
-                <TextBlock x:Name="RobotScore" Canvas.Left="43" TextWrapping="Wrap" Text="5" Canvas.Top="249" Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center"/>
-                <TextBlock x:Name="User" Canvas.Left="43" TextWrapping="Wrap" Canvas.Top="216" Height="33" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="40" TextAlignment="Center" Text="User"/>
-            </Canvas>
-            <Button x:Name="PuseButton" HorizontalAlignment="Stretch" Margin="140,0,118,10" Grid.Row="2" VerticalAlignment="Bottom" d:LayoutOverrides="LeftPosition, RightPosition" Height="75">
-                <Button.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="Assets/pouseButton.png"/>
-                </Button.Background>
-            </Button>
+                    </TextBlock>
+                    <TextBlock x:Name="UserScore" Grid.Row ="1" Grid.Column="0"   Text="3"  Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center" />
+                    <TextBlock x:Name="RobotScore" Grid.Row ="1" Grid.Column="1"  Text="5"  Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center" />
+                    <TextBlock x:Name="User" Canvas.Left="43" TextWrapping="Wrap" Canvas.Top="216" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="40" TextAlignment="Center" Text="User" />
+                </Grid>
+                <!--<Image x:Name="scoreTable" Grid.Row ="1" Source="Assets/ScoreTable.PNG" HorizontalAlignment="Stretch" Canvas.Left="43" Canvas.Top="211"/>-->
+                
+                <Button x:Name="PuseButton"  HorizontalAlignment="Stretch" Margin="140,0,118,10" Grid.Row="2" VerticalAlignment="Bottom" d:LayoutOverrides="LeftPosition, RightPosition" Height="75">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets/pouseButton.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+
 
         </Grid>
     </Grid>
