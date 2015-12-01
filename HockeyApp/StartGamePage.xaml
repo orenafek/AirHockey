@@ -22,7 +22,7 @@
             <TextBlock x:Name="lowerPadding" Grid.Row ="3" Text=""></TextBlock>
             <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
             <StackPanel x:Name="NamePanel" Grid.Row="2">
-                <TextBlock Text="Air Hockey App" Margin="0,0,0,40"/>
+                
                 <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center"/>
                 <StackPanel x:Name="inputPanel" Orientation="Vertical" Margin="0,20,0,20" HorizontalAlignment="Center">
                     <TextBox x:Name="nameInput" Width="280" HorizontalAlignment="Left" Text="" PlaceholderText="Enter Your Name Here."  TextChanging="NameInput_OnTextChanging"/>
