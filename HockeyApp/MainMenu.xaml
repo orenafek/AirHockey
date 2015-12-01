@@ -11,6 +11,28 @@
     FontSize="24pt">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="wideView">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rp_options.(RelativePanel.RightOf)" Value="free"/>
+                        <Setter Target="rp_options.(RelativePanel.AlignTopWidth)" Value="free"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="narrowView">
+                    <VisualState.Setters>
+                        <Setter Target="rp_options.(RelativePanel.Below)" Value="paid"/>
+                        <Setter Target="rp_options.(RelativePanel.AlignLeftWithPanel)" Value="true"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid Background="Black">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -19,15 +41,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="UpperPadding" Grid.Row="0"></TextBlock>
-            <TextBlock x:Name="lowerPadding" Grid.Row ="3"></TextBlock>
-            <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
-            <Canvas Grid.Row="2">
-                <Canvas.Resources>
-                    
-                </Canvas.Resources>
-                <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Canvas.Left="50" Canvas.Top="50" Click="BtnGame_OnClick" />
-                <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}" Canvas.Left="50" Canvas.Top="220" Click="BtnScoreBoard_OnClick" />
-            </Canvas>
+            <TextBlock x:Name="LowerPadding" Grid.Row ="3"></TextBlock>
+            <Image x:Name="Logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
+            <RelativePanel x:Name="rp_options" Grid.Row="2" VerticalAlignment="Center" Height="281" HorizontalAlignment="Center"  >
+               
+                <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Click="BtnGame_OnClick" Margin="0,0,0,40" />
+                
+                <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}"  Click="BtnScoreBoard_OnClick" RelativePanel.Below="BtnGame"  />
+            </RelativePanel>
         </Grid>
     </Grid>
 </Page>
