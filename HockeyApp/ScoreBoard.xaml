@@ -31,10 +31,10 @@
                     	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="50.667" />
                 
                 <StackPanel x:Name="stkPnl_options" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"  >
-                    <Button x:Name="btn_ByTime" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot"  Content="By Time" Height="40"
-                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="20" BorderBrush="White"/>
-                    <Button x:Name="btn_ByScore" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" Content="By Score"  Height="40"
-                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="20" BorderBrush="White" Margin="10,0,0,0" />
+                    <Button x:Name="btn_ByTime" Style="{StaticResource RedButton}" Content="By Time" Height="40"
+                    	FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0"/>
+                    <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40"
+                    	FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0"/>
                 </StackPanel>
 
                 <!--<ListBox x:Name="lb_Players" Grid.Row="2"  ItemsSource="{Binding Players}" DisplayMemberPath="Name" Width="auto" Height="auto"/>-->

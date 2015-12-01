@@ -5,4 +5,16 @@
     xmlns:local="using:HockeyApp"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <Style TargetType="Button" x:Key="RedButton">
+            <Setter Property="FontFamily" Value="Assets/QuirkyRobot.ttf#QuirkyRobot"/>
+            <Setter Property="Padding" Value="8,16,8,0" />
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="42.667" />
+            <Setter Property="BorderBrush" Value="White" />
+        </Style>
+    </Application.Resources>
 </Application>

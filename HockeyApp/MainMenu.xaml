@@ -25,22 +25,8 @@
                 <Canvas.Resources>
                     
                 </Canvas.Resources>
-                <Button x:Name="BtnGame" Content="התחל משחק" Height="100" Width="250"
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White" Click="BtnGame_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Image Source="Assets/PlayButton.png"></Image>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button x:Name="BtnScoreBoard" Content="טבלת שיאים" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White" Click="BtnScoreBoard_OnClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Image Source="Assets/ScoreboardButton.png"></Image>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Canvas.Left="50" Canvas.Top="50" Click="BtnGame_OnClick" />
+                <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}" Canvas.Left="50" Canvas.Top="220" Click="BtnScoreBoard_OnClick" />
             </Canvas>
         </Grid>
     </Grid>

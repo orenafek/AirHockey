@@ -26,8 +26,8 @@
                 <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center" FontFamily="Global Monospace" FontSize="18.667"/>
                 <StackPanel x:Name="inputPanel" Orientation="Vertical" Margin="0,20,0,20" HorizontalAlignment="Center">
                     <TextBox x:Name="nameInput" Width="280" HorizontalAlignment="Left" Text="" PlaceholderText="Enter Your Name Here."  TextChanging="NameInput_OnTextChanging"/>
-                    <Button x:Name="inputButton" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" Margin="0,15,0,0" Content="Submit" Click="ButtonClick" Height="40"
-                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="42.667" IsEnabled="False"/>
+                    <Button x:Name="inputButton" Style="{StaticResource RedButton}" Content="Submit" Click="ButtonClick" Margin="0,15,0,0"
+                    	IsEnabled="False"/>
                 </StackPanel>
             </StackPanel>
             <Canvas x:Name="ChooseTimeOrScore" Grid.Row="2" Visibility="Collapsed">
@@ -35,10 +35,10 @@
 
                 </Canvas.Resources>
                 <TextBlock x:Name="tb_greetingOutput"/>
-                <Button x:Name="btn_byTime" Content="Limit by Time" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="50" HorizontalAlignment="Center" BorderBrush="White" Click="BtnOption_OnClick" ></Button>
-                <Button x:Name="btn_byScore" Content="Limit by Score" Height="100" Width="250" 
-                        Foreground="#FFCD2323" FontWeight="Bold" Canvas.Left="50" Canvas.Top="220" HorizontalAlignment="Center" BorderBrush="White" Click="BtnOption_OnClick"></Button>
+                <Button x:Name="btn_byTime" Style="{StaticResource RedButton}" Content="Limit by Time"
+                        Canvas.Left="50" Canvas.Top="50" BorderBrush="White" Click="BtnOption_OnClick" ></Button>
+                <Button x:Name="btn_byScore" Style="{StaticResource RedButton}" Content="Limit by Score"
+                        Canvas.Left="50" Canvas.Top="220" BorderBrush="White" Click="BtnOption_OnClick"></Button>
             </Canvas>
         </Grid>
     </Grid>
