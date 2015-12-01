@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,27 +20,11 @@ namespace HockeyApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainMenu : Page
+    public sealed partial class ScoreBoard : Page
     {
-        public MainMenu()
+        public ScoreBoard()
         {
             this.InitializeComponent();
         }
-
-        private void BtnGame_OnClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof (StartGamePage), null);
-        }
-
-        private void BtnScoreBoard_OnClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(ScoreBoard),null);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Utils.EnableNavigateButton();
-        }
-        
     }
 }
