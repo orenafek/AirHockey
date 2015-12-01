@@ -15,20 +15,20 @@
             <VisualStateGroup>
                 <VisualState x:Name="wideView">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
+                        <AdaptiveTrigger MinWindowHeight="500" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="rp_options.(RelativePanel.RightOf)" Value="free"/>
-                        <Setter Target="rp_options.(RelativePanel.AlignTopWidth)" Value="free"/>
+                        <Setter Target="BtnScoreBoard.(RelativePanel.Below)" Value="free" />
+                        <Setter Target="BtnScoreBoard.(RelativePanel.RightOf" Value="BtnGame" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="narrowView">
                     <VisualState.Setters>
-                        <Setter Target="rp_options.(RelativePanel.Below)" Value="paid"/>
-                        <Setter Target="rp_options.(RelativePanel.AlignLeftWithPanel)" Value="true"/>
+                        <Setter Target="BtnScoreBoard.(RelativePanel.Below)" Value="BtnGame" />
+                        <Setter Target="BtnScoreBoard.(RelativePanel.RightOf" Value="free" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <AdaptiveTrigger MinWindowHeight="0" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
