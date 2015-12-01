@@ -27,8 +27,8 @@
                 <TextBlock x:Name="textBlock" Grid.Row="0" Canvas.Left="43" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="59" Height="97" Width="281"/>
                 <Grid Grid.Row="1" Margin="20,0,20,0" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25*" />
-                        <RowDefinition Height="75*" />
+                        <RowDefinition Height="27*" />
+                        <RowDefinition Height="73*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -36,16 +36,17 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Row="0" Grid.Column="0" BorderBrush="Red" BorderThickness="3" />
                     <Border Grid.Row="0" Grid.Column="1" BorderBrush="Red" BorderThickness="3" />
-                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Red" BorderThickness="3" />
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Red" BorderThickness="3"  />
                     <Border Grid.Row="1" Grid.Column="1" BorderBrush="Red" BorderThickness="3" />
-                    <TextBlock x:Name="Robot" Grid.Row ="0" Grid.Column="1" TextWrapping="Wrap" Canvas.Top="216" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="48" TextAlignment="Center" >
-                	<Run FontSize="40" Text="Robot"/>
-                	<LineBreak/>
-                	<Run FontSize="42.667" Text="obot"/>
+                    <TextBlock x:Name="Robot" Grid.Row ="0" Grid.Column="1" TextWrapping="Wrap"  Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" 
+                               FontSize="48" TextAlignment="Center" Margin="5" Grid.RowSpan="2" >
+                    	<Run FontSize="40" Text="Robot" />
                     </TextBlock>
-                    <TextBlock x:Name="UserScore" Grid.Row ="1" Grid.Column="0"   Text="3"  Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center" />
-                    <TextBlock x:Name="RobotScore" Grid.Row ="1" Grid.Column="1"  Text="5"  Height="100" Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center" />
-                    <TextBlock x:Name="User" Canvas.Left="43" TextWrapping="Wrap" Canvas.Top="216" Width="145" Foreground="#FF1F00E4" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="40" TextAlignment="Center" Text="User" />
+                    <TextBlock x:Name="UserScore" Grid.Row ="1" Grid.Column="0"   Text="3"  Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center"  />
+                    <TextBlock x:Name="RobotScore" Grid.Row ="1" Grid.Column="1"  Text="5"  Width="145" Foreground="#FF1F00E4" FontSize="96" FontFamily="Assets/digital-7.ttf#Digital-7" TextAlignment="Center" />
+                    <TextBlock x:Name="User" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap"  Width="145" Foreground="#FF1F00E4" 
+                               FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot" FontSize="40" TextAlignment="Center" Text="User" 
+                               Margin="5"  />
                 </Grid>
                 <!--<Image x:Name="scoreTable" Grid.Row ="1" Source="Assets/ScoreTable.PNG" HorizontalAlignment="Stretch" Canvas.Left="43" Canvas.Top="211"/>-->
                 
