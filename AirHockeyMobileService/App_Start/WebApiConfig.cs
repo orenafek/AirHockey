@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Web.Http;
 using AirHockeyMobileService.Models;
 using Microsoft.WindowsAzure.Mobile.Service;
-using Leaderboard.DataObjects;
 
 namespace AirHockeyMobileService
 {
@@ -29,7 +28,7 @@ namespace AirHockeyMobileService
 
     public class MobileServiceInitializer : DropCreateDatabaseIfModelChanges<MobileServiceContext>
     {
-        protected override void Seed(MobileServiceContext context)
+        /*protected override void Seed(MobileServiceContext context)
         {
             List<Player> players = new List<Player>
             {
@@ -44,7 +43,7 @@ namespace AirHockeyMobileService
             }
 
             base.Seed(context);
-        }
+        }*/
     }
 }
 
