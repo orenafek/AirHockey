@@ -246,12 +246,11 @@
   <ItemGroup>
     <Compile Include="ADO_Data_Service.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\PlayerRankController.cs" />
-    <Compile Include="DataObjects\Player.cs" />
-    <Compile Include="DataObjects\PlayerRank.cs" />
-    <Compile Include="DataObjects\PlayerRankDto.cs" />
-    <Compile Include="DataObjects\PlayerResult.cs" />
+    <Compile Include="Controllers\ScoreLimitedGameController.cs" />
+    <Compile Include="Controllers\TimeLimitedGameController.cs" />
+    <Compile Include="DataObjects\Game.cs" />
+    <Compile Include="DataObjects\ScoreLimitedGame.cs" />
+    <Compile Include="DataObjects\TimeLimitedGame.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">
