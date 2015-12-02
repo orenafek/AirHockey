@@ -33,9 +33,11 @@ namespace HockeyApp
             // if text is valid
             //this.Frame.Navigate(typeof(MainMenu), nameInput.Text);
             //else
-            if (!System.Text.RegularExpressions.Regex.IsMatch(nameInput.Text, "^[a-zA-Z]+([ ][a-zA-Z]+)*$") || nameInput.Text.Length > 12)
-                Utils.Show("Invalid or Too Long name, please enter again", new List<UICommand> { new UICommand("Close") });
-            else {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(nameInput.Text, "^[a-zA-Z]+([ ][a-zA-Z]+)*$") ||
+                nameInput.Text.Length > 12)
+                Utils.Show("Invalid or Too Long name, please enter again", new List<UICommand> {new UICommand("Close")});
+            else
+            {
                 NamePanel.Visibility = Visibility.Collapsed;
                 tb_greetingOutput.Text = "Hello, " + nameInput.Text + "!";
                 ChooseTimeOrScore.Visibility = Visibility.Visible;
@@ -44,7 +46,7 @@ namespace HockeyApp
 
         private void NameInput_OnTextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            inputButton.IsEnabled = ((TextBox)sender).Text != string.Empty;
+            inputButton.IsEnabled = ((TextBox) sender).Text != string.Empty;
         }
 
         private void BtnOption_OnClick(object sender, RoutedEventArgs e)

@@ -31,11 +31,10 @@ namespace HockeyApp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
-        { 
+        {
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
                 return;
@@ -49,14 +48,13 @@ namespace HockeyApp
             }
         }
 
-    /// <summary>
-    /// Invoked when the application is launched normally by the end user.  Other entry points
-    /// will be used such as when the application is launched to open a specific file.
-    /// </summary>
-    /// <param name="e">Details about the launch request and process.</param>
-    protected override void OnLaunched(LaunchActivatedEventArgs e)
+        /// <summary>
+        /// Invoked when the application is launched normally by the end user.  Other entry points
+        /// will be used such as when the application is launched to open a specific file.
+        /// </summary>
+        /// <param name="e">Details about the launch request and process.</param>
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -85,17 +83,17 @@ namespace HockeyApp
                 Window.Current.Content = rootFrame;
             }
 
-        SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-            rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-            
-        
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+
             if (rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainMenu), e.Arguments);
+                rootFrame.Navigate(typeof (MainMenu), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

@@ -5,36 +5,37 @@
     xmlns:local="using:HockeyApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" FontSize="32" Foreground="White"
-    >
+    mc:Ignorable="d" FontSize="32" Foreground="White">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="Black">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="128"></RowDefinition>
-                <RowDefinition Height="14*"></RowDefinition>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="128" />
+                <RowDefinition Height="14*" />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock x:Name="UpperPadding" Grid.Row="0"></TextBlock>
-            <TextBlock x:Name="lowerPadding" Grid.Row ="3"></TextBlock>
-            <Image x:Name="logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
+            <TextBlock x:Name="UpperPadding" Grid.Row="0" />
+            <TextBlock x:Name="lowerPadding" Grid.Row="3" />
+            <Image x:Name="logo" Grid.Row="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch"
+                   Margin="5,0,0,0" />
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="40" />
                     <RowDefinition />
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" x:Name="tb_ScoreBoardHeadline" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot"  Height="40" Text="Score Board"
-                    	Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="50.667" />
-                
-                <StackPanel x:Name="stkPnl_options" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"  >
+                <TextBlock Grid.Row="0" x:Name="tb_ScoreBoardHeadline" FontFamily="Assets/QuirkyRobot.ttf#QuirkyRobot"
+                           Height="40" Text="Score Board"
+                           Foreground="#FFCD2323" FontWeight="Bold" HorizontalAlignment="Center" FontSize="50.667" />
+
+                <StackPanel x:Name="stkPnl_options" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="btn_ByTime" Style="{StaticResource RedButton}" Content="By Time" Height="40"
-                    	FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0"/>
+                            FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
                     <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40"
-                    	FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0"/>
+                            FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
                 </StackPanel>
 
                 <!--<ListBox x:Name="lb_Players" Grid.Row="2"  ItemsSource="{Binding Players}" DisplayMemberPath="Name" Width="auto" Height="auto"/>-->

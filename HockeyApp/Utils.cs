@@ -35,9 +35,12 @@ namespace HockeyApp
 
         public string PlayerName { get; set; }
     }
+
+    
     public class Utils
     {
-        public static async void Show(string text, List<UICommand> commands, uint defaultCommandIndex = 0, uint cancelCommandIndex = 0)
+        public static async void Show(string text, List<UICommand> commands, uint defaultCommandIndex = 0,
+            uint cancelCommandIndex = 0)
         {
             var message = new MessageDialog(text);
             foreach (UICommand command in commands)
