@@ -19,9 +19,9 @@
         
         <Style TargetType="TextBlock" x:Key="RedTextBlock">
             <Setter Property="FontFamily" Value="Assets/digital-7.ttf#Digital-7" /> 
-            <Setter Property="Foreground" Value="Red" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="42.667" />
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontSize" Value="96" />
             <Setter Property="VerticalAlignment"  Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>

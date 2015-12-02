@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     FontFamily="Arial"
     Foreground="White"
-    FontSize="24pt">
+    FontSize="32">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="Black">

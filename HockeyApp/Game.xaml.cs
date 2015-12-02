@@ -32,28 +32,66 @@ namespace HockeyApp
             Timer.Interval = TimeSpan.FromMilliseconds(1000);
             Timer.Tick += DispatcherTimer_Tick;
             CountDownTimeSpan = TimeSpan.FromSeconds(20);
-            tb_Timer.Text = CountDownTimeSpan.ToString();
+            tb_Timer.Text = showTime();
             Timer.Start();
             
 
             //EndTime = (EndTime == DateTime.MinValue) ? DateTime.Now + (TimeSpan)
         }
 
+        private string showTime()
+        {
+            return CountDownTimeSpan.ToString().Substring(3); // format is MM:SS
+        }
+
+        private void stopTimer()
+        {
+            if (Timer.IsEnabled && CountDownTimeSpan != TimeSpan.Zero) {Timer.Stop();}
+        }
+
+        private void resumeTimer()
+        {
+            if(!Timer.IsEnabled && CountDownTimeSpan != TimeSpan.Zero) { Timer.Start();}
+        }
+
         private void DispatcherTimer_Tick(object sender, object eo)
         {
             CountDownTimeSpan -= TimeSpan.FromSeconds(1);
-            tb_Timer.Text = CountDownTimeSpan.ToString();
+            tb_Timer.Text = showTime();
             if (CountDownTimeSpan == TimeSpan.FromSeconds(0))
             {
                 //tb_Timer.Foreground = new SolidColorBrush(Color.FromArgb(255,255,0,0));
                 Timer.Stop();
-                Utils.Show("TIME IS UP !",new List<UICommand> {new UICommand("OK")});
+                MessageDialog msgDialog = new MessageDialog("Game is Over !");
+                UICommand OK = new UICommand("OK");
+                OK.Invoked += Popup_OK_Invoked;
+                Utils.Show(msgDialog,new List<UICommand> {OK});
+                
             }
 
+        }
+
+        private void Popup_OK_Invoked(IUICommand command)
+        {
+            //TODO: Insert new score to the DB
+            Frame.Navigate(typeof(ScoreBoard), null);
         }
 
         private TimeSpan CountDownTimeSpan { get; set; }
         public DateTime EndTime { get; set; }
         public DispatcherTimer Timer { get; set; }
+
+        private void PauseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Timer.IsEnabled)
+            {
+                stopTimer();
+            }
+
+            else
+            {
+                resumeTimer();
+            }
+        }
     }
 }

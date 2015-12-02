@@ -27,18 +27,16 @@
                 </Grid.RowDefinitions>
                 
                     <!--<c4FToolkit:TimeSpanPicker   x:Name="timeSpan" Value="0" HorizontalAlignment="Center"/>--> 
-                <TextBlock x:Name="tb_Timer" Grid.Row="0"  Text="TextBlock" Height="97" Width="281" Style="{StaticResource  RedTextBlock}">
+                <TextBlock x:Name="tb_Timer" Grid.Row="0"  Text="TextBlock" Height="97" Width="281" Style="{StaticResource  RedTextBlock}" Margin="0,0,0,30">
                     <TextBlock.Resources>
                         <Storyboard x:Name="myStoryboard">
                         <!-- Animate the background color of the canvas from red to green over 4 seconds. -->
-                            <ColorAnimation Storyboard.TargetName="mySolidColorBrush"
-                                Storyboard.TargetProperty="Color"
+                            <ColorAnimation Storyboard.TargetName="tb_Timer"
+                                Storyboard.TargetProperty="Forground"
                                 From="Red" To="Green" Duration="0:0:4" />
                         </Storyboard>
                     </TextBlock.Resources>
-                    <TextBlock.Foreground>
-                        <SolidColorBrush x:Name="mySolidColorBrush" Color="Red"></SolidColorBrush>
-                    </TextBlock.Foreground>
+                    
                 </TextBlock>
                 <Grid Grid.Row="1" Margin="20,0,20,0">
                     <Grid.RowDefinitions>
@@ -72,8 +70,8 @@
                 </Grid>
                 <!--<Image x:Name="scoreTable" Grid.Row ="1" Source="Assets/ScoreTable.PNG" HorizontalAlignment="Stretch" Canvas.Left="43" Canvas.Top="211"/>-->
 
-                <Button x:Name="PuseButton" HorizontalAlignment="Stretch" Margin="140,0,118,10" Grid.Row="2"
-                        VerticalAlignment="Bottom" d:LayoutOverrides="LeftPosition, RightPosition" Height="75">
+                <Button x:Name="PauseButton" HorizontalAlignment="Stretch" Margin="140,0,118,10" Grid.Row="2"
+                        VerticalAlignment="Bottom" d:LayoutOverrides="LeftPosition, RightPosition" Height="75" Click="PauseButton_OnClick">
                     <Button.Background>
                         <ImageBrush Stretch="Fill" ImageSource="Assets/pouseButton.png" />
                     </Button.Background>

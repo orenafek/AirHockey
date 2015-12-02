@@ -39,19 +39,24 @@ namespace HockeyApp
     
     public class Utils
     {
-        public static async void Show(string text, List<UICommand> commands, uint defaultCommandIndex = 0,
+        private static Windows.UI.Popups.IUICommand msgResponseAsyncOperation { get; set; }
+        public static async void Show(MessageDialog msgDialog, List<UICommand> commands, uint defaultCommandIndex = 0,
             uint cancelCommandIndex = 0)
         {
-            var message = new MessageDialog(text);
+            var message = msgDialog;
             foreach (UICommand command in commands)
             {
                 message.Commands.Add(command);
             }
             message.DefaultCommandIndex = defaultCommandIndex;
             message.CancelCommandIndex = cancelCommandIndex;
-            await message.ShowAsync();
+            msgResponseAsyncOperation = await message.ShowAsync();
         }
 
+        public static Windows.UI.Popups.IUICommand getMsgResponse()
+        {
+            return msgResponseAsyncOperation;
+        }
         public static void EnableNavigateButton()
         {
             Frame rootFrame = Window.Current.Content as Frame;

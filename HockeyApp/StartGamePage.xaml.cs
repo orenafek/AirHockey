@@ -35,7 +35,10 @@ namespace HockeyApp
             //else
             if (!System.Text.RegularExpressions.Regex.IsMatch(nameInput.Text, "^[a-zA-Z]+([ ][a-zA-Z]+)*$") ||
                 nameInput.Text.Length > 12)
-                Utils.Show("Invalid or Too Long name, please enter again", new List<UICommand> {new UICommand("Close")});
+            {
+                MessageDialog msg = new MessageDialog("Invalid or Too Long name, please enter again");
+                Utils.Show(msg, new List<UICommand> {new UICommand("Close")});
+            }
             else
             {
                 NamePanel.Visibility = Visibility.Collapsed;
