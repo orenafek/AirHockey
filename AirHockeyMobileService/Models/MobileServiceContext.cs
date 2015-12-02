@@ -42,9 +42,9 @@ namespace AirHockeyMobileService.Models
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
-        public System.Data.Entity.DbSet<Leaderboard.DataObjects.Player> Players { get; set; }
+        public System.Data.Entity.DbSet<AirHockeyMobileService.DataObjects.ScoreLimitedGame> ScoreLimitedGames { get; set; }
 
-        public System.Data.Entity.DbSet<Leaderboard.DataObjects.PlayerRank> PlayerRanks { get; set; }
+        public System.Data.Entity.DbSet<AirHockeyMobileService.DataObjects.TimeLimitedGame> TimeLimitedGames { get; set; }
     }
 
 }
