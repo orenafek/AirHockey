@@ -42,11 +42,10 @@
             <TextBlock x:Name="LowerPadding" Grid.Row ="3"></TextBlock>
             <Image x:Name="Logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
             <RelativePanel x:Name="rp_options" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"  >
-               
                 <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Click="BtnGame_OnClick" Margin="10,20,10,20" />
-                
                 <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}"  Click="BtnScoreBoard_OnClick" Margin="10,20,10,0" />
             </RelativePanel>
+            <Button x:Name="btn_mute" Grid.Row="2" VerticalAlignment="Bottom" Margin="10"  Style="{StaticResource btn_SoundControl}" Click="Btn_mute_OnClick" />
         </Grid>
     </Grid>
 </Page>

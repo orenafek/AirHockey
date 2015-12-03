@@ -132,6 +132,9 @@
     <Content Include="Assets\PlayButton.png" />
     <Content Include="Assets\ScoreboardButton.png" />
     <Content Include="Assets\ScoreTable.PNG" />
+    <Content Include="Assets\Sounds\Wigle_8bit.mp3" />
+    <Content Include="Assets\sound_off_icon.png" />
+    <Content Include="Assets\sound_on_icon.png" />
     <Content Include="Assets\Splash600x300.png" />
     <Content Include="Assets\Splash620x300.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

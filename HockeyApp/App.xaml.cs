@@ -73,6 +73,7 @@ namespace HockeyApp
 
                 rootFrame.Navigated += OnNavigated;
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.Style = Resources["MediaStream"] as Style;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

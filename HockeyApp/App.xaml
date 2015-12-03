@@ -16,8 +16,9 @@
             <Setter Property="FontSize" Value="42.667" />
             <!--<Setter Property="BorderBrush" Value="White" />-->
         </Style>
+
         
-        <Style TargetType="TextBlock" x:Key="RedTextBlock">
+            <Style TargetType="TextBlock" x:Key="RedTextBlock">
             <Setter Property="FontFamily" Value="Assets/digital-7.ttf#Digital-7" /> 
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Foreground" Value="Red" />
@@ -25,5 +26,31 @@
             <Setter Property="VerticalAlignment"  Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
+
+        <Style x:Key="btn_SoundControl" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Image Source="Assets/sound_on_icon.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="30" />
+        </Style>
+        
+        <Style x:Key="MediaStream" TargetType="Frame">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Frame">
+                        <Grid>
+                            <!-- Background Player -->
+                            <MediaElement x:Name="BgSound" IsLooping="True" Source="Assets/Sounds/Wigle_8bit.mp3" />
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> 
     </Application.Resources>
 </Application>

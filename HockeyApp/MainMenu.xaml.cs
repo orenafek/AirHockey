@@ -26,7 +26,10 @@ namespace HockeyApp
         public MainMenu()
         {
             this.InitializeComponent();
+            
         }
+
+       
 
         private void BtnGame_OnClick(object sender, RoutedEventArgs e)
         {
@@ -42,6 +45,10 @@ namespace HockeyApp
         {
             Utils.EnableNavigateButton();
         }
-        
+
+        private void Btn_mute_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
