@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace HockeyApp
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+        const string serviceUrl = "http://localhost:6588/";
+        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
+
+
         public App()
         {
             this.InitializeComponent();

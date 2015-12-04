@@ -37,8 +37,7 @@
                     <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40"
                             FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
                 </StackPanel>
-
-                <!--<ListBox x:Name="lb_Players" Grid.Row="2"  ItemsSource="{Binding Players}" DisplayMemberPath="Name" Width="auto" Height="auto"/>-->
+                <ListBox x:Name="lb_Players" Grid.Row="2"  ItemsSource="{Binding TimeLimitedGames}" DisplayMemberPath="Name" Width="auto" Height="auto" Margin="20"/>
             </Grid>
         </Grid>
     </Grid>
