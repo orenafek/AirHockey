@@ -132,5 +132,10 @@ namespace HockeyApp
                     ? AppViewBackButtonVisibility.Visible
                     : AppViewBackButtonVisibility.Collapsed;
         }
+
+        
     }
+
+
+
 }

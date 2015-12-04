@@ -5,10 +5,11 @@
     xmlns:local="using:HockeyApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   
     mc:Ignorable="d"
     FontFamily="Arial"
     Foreground="White"
-    FontSize="24pt">
+    FontSize="32">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -45,7 +46,7 @@
                 <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Click="BtnGame_OnClick" Margin="10,20,10,20" />
                 <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}"  Click="BtnScoreBoard_OnClick" Margin="10,20,10,0" />
             </RelativePanel>
-            <Button x:Name="btn_mute" Grid.Row="2" VerticalAlignment="Bottom" Margin="10"  Style="{StaticResource btn_SoundControl}" Click="Btn_mute_OnClick" />
+            <local:VolumeControl Grid.Row="2" VerticalAlignment="Bottom" Name="VolumeControl" />
         </Grid>
     </Grid>
 </Page>

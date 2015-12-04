@@ -46,9 +46,6 @@ namespace HockeyApp
             Utils.EnableNavigateButton();
         }
 
-        private void Btn_mute_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
     }
 }

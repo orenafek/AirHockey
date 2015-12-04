@@ -44,6 +44,8 @@
                 <Button x:Name="btn_byScore" Style="{StaticResource RedButton}" Content="Limit by Score"
                         Canvas.Left="50" Canvas.Top="220" BorderBrush="White" Click="BtnOption_OnClick" />
             </Canvas>
+            
+            <local:VolumeControl Name="VolumeControl" Grid.Row="2" VerticalAlignment="Bottom"></local:VolumeControl>
         </Grid>
     </Grid>
 </Page>

@@ -7,6 +7,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace HockeyApp
@@ -70,6 +71,29 @@ namespace HockeyApp
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private static MediaElement BackgroundSoundPlayer
+        {
+            get
+            {
+                var rootGrid = VisualTreeHelper.GetChild(Window.Current.Content, 0);
+               return  VisualTreeHelper.GetChild(rootGrid, 0) as MediaElement;
+            }
+        }
+
+        private static double backgroundVolume { get; set; }
+        public static void Mute()
+        {
+            backgroundVolume = BackgroundSoundPlayer.Volume;
+            BackgroundSoundPlayer.Volume = 0;
+           
+        }
+
+        public static void UnMute()
+        {
+            BackgroundSoundPlayer.Volume = backgroundVolume;
+            
         }
     }
 }

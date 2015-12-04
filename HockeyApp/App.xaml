@@ -39,13 +39,13 @@
             <Setter Property="Width" Value="30" />
         </Style>
         
-        <Style x:Key="MediaStream" TargetType="Frame">
+        <Style x:Key="MediaStream" TargetType="Frame" x:Name="mediaStyle" >
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Frame">
                         <Grid>
                             <!-- Background Player -->
-                            <MediaElement x:Name="BgSound" IsLooping="True" Source="Assets/Sounds/Wigle_8bit.mp3" />
+                            <MediaElement  x:Name="BgSound" IsLooping="True" Source="Assets/Sounds/Wigle_8bit.mp3" />
                             <ContentPresenter />
                         </Grid>
                     </ControlTemplate>
