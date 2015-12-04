@@ -7,9 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <local:MasterPage>
-            
-        </local:MasterPage>
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="128"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="UpperPadding" Grid.Row="0"></TextBlock>
+        <TextBlock x:Name="LowerPadding" Grid.Row ="3"></TextBlock>
+        <Image x:Name="Logo" Grid.Row ="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
+        <RelativePanel x:Name="Panel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btn_Connect" Content="Connect Now !" Foreground="White" Background="CadetBlue" HorizontalAlignment="Center" Click="Btn_Connect_OnClick"/>
+            <ToggleSwitch x:Name="ts_led"  Foreground="White"  Toggled="Ts_led_OnToggled" RelativePanel.Below="btn_Connect" Background="CadetBlue"/>
+            <TextBlock x:Name="Status" RelativePanel.Below="ts_led" Foreground="White" />
+        </RelativePanel>
+        <local:VolumeControl Grid.Row="2" VerticalAlignment="Bottom" x:Name="vc" />
     </Grid>
 </Page>
