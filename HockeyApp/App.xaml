@@ -27,7 +27,7 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="btn_SoundControl" TargetType="Button">
+        <Style x:Key="btn_SoundControl_on" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -35,10 +35,22 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="25" />
         </Style>
-        
+
+        <Style x:Key="btn_SoundControl_off" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Image Source="Assets/sound_off_icon.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="25" />
+        </Style>
+
         <Style x:Key="MediaStream" TargetType="Frame" x:Name="mediaStyle" >
             <Setter Property="Template">
                 <Setter.Value>

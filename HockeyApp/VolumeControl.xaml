@@ -9,7 +9,13 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-        <Button x:Name="btn_mute" VerticalAlignment="Bottom" Margin="10"  Style="{StaticResource btn_SoundControl}" Click="Btn_mute_OnClick" />
+    <Grid Width="150" HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition  Width="100" />
+        </Grid.ColumnDefinitions>
+        
+        <Button x:Name="btn_mute" Grid.Column="0" VerticalAlignment="Bottom" Margin="10"  Style="{StaticResource btn_SoundControl_on}" Click="Btn_mute_OnClick" />
+        <Slider x:Name="VolumeSlider"  Background="White"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="37" ValueChanged="VolumeSlider_OnValueChanged" />
     </Grid>
 </UserControl>

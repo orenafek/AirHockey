@@ -78,7 +78,8 @@
                 </Button>
             </Grid>
 
-
+        <local:VolumeControl Name="VolumeControl" Grid.Row="2" VerticalAlignment="Bottom"></local:VolumeControl>
         </Grid>
+        
     </Grid>
 </Page>

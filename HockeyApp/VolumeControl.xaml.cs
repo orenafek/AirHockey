@@ -25,15 +25,60 @@ namespace HockeyApp
             SoundMuted = false;
         }
 
+
+        private static MediaElement BackgroundSoundPlayer
+        {
+            get
+            {
+                var rootGrid = VisualTreeHelper.GetChild(Window.Current.Content, 0);
+                return VisualTreeHelper.GetChild(rootGrid, 0) as MediaElement;
+            }
+        }
+
+        private double BackgroundVolume
+        {
+      
+            get { return BackgroundSoundPlayer.Volume; }
+            set { BackgroundSoundPlayer.Volume = value;  }
+        }
+
+        private double volumeKeeper = 0;
+
+        public  void Mute()
+        {
+            volumeKeeper = BackgroundVolume;
+            BackgroundVolume = 0;
+
+        }
+
+        public void UnMute()
+        {
+            BackgroundVolume = volumeKeeper;
+        }
+
         private bool SoundMuted { get; set; }
+
         private void Btn_mute_OnClick(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
             if (SoundMuted)
-                Utils.UnMute();
+            {
+                UnMute();           
+                //btn.Style = Resources["btn_SoundControl_off"] as Style;
+            }
+
             else
-                Utils.Mute();
+            {
+                Mute();
+                //btn.Style = Resources["btn_SoundControl_on"] as Style;
+            }
 
             SoundMuted = !SoundMuted;
+        }
+
+        private void VolumeSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            BackgroundVolume = e.NewValue;
         }
     }
 }

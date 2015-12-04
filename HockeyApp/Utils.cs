@@ -73,27 +73,5 @@ namespace HockeyApp
                 rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
-        private static MediaElement BackgroundSoundPlayer
-        {
-            get
-            {
-                var rootGrid = VisualTreeHelper.GetChild(Window.Current.Content, 0);
-               return  VisualTreeHelper.GetChild(rootGrid, 0) as MediaElement;
-            }
-        }
-
-        private static double backgroundVolume { get; set; }
-        public static void Mute()
-        {
-            backgroundVolume = BackgroundSoundPlayer.Volume;
-            BackgroundSoundPlayer.Volume = 0;
-           
-        }
-
-        public static void UnMute()
-        {
-            BackgroundSoundPlayer.Volume = backgroundVolume;
-            
-        }
     }
 }
