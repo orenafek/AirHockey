@@ -45,7 +45,7 @@
                     <ControlTemplate TargetType="Frame">
                         <Grid>
                             <!-- Background Player -->
-                            <MediaElement x:Name="BgSound" IsLooping="True" Source="Assets/Sounds/Wigle_8bit.mp3" />
+                            <MediaElement x:Name="BgSound" IsLooping="True" Source="Assets/Sounds/Wigle_8bit.mp3" IsMuted="True" />
                             <ContentPresenter />
                         </Grid>
                     </ControlTemplate>
