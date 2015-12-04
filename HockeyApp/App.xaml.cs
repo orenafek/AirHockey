@@ -133,7 +133,17 @@ namespace HockeyApp
                     : AppViewBackButtonVisibility.Collapsed;
         }
 
-        
+        public Style MuteStyle
+        {
+            get { return Resources["btn_SoundControl_off"] as Style; }
+        }
+
+        public Style UnMuteStyle
+        {
+            get { return Resources["btn_SoundControl_on"] as Style; }
+        }
+
+
     }
 
 

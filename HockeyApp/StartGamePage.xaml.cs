@@ -60,5 +60,10 @@ namespace HockeyApp
             Session session = new Session(byScore, nameInput.Text);
             Frame.Navigate(typeof (Game), session);
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            vc = e.Parameter as VolumeControl;
+        }
     }
 }
