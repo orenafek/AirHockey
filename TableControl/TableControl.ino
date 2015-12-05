@@ -22,17 +22,19 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 
-	transmition = "";
-
 	//TODO: FOR MEGA CHANGE TO :
 	// while(Serial.available() > 0){
 	while (Serial.available() > 0) {
+		
 		transmition += char(Serial.read());
 	}
 
 	if (transmition == "") {
 		return;
 	}
+
+	/*if(!transmition.equals(""))
+		Serial.println(transmition);*/
 
 	if(transmition.equalsIgnoreCase("ON")){
 		digitalWrite(LED, HIGH);
