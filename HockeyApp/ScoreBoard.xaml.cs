@@ -28,7 +28,14 @@ namespace HockeyApp
         public ScoreBoard()
         {
             this.InitializeComponent();
+            //viewModel.GetAllTimeLimitedGamesAsync();
             this.DataContext = viewModel;
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs args)
+        {
+            await viewModel.GetAllTimeLimitedGamesAsync();
+            await viewModel.GetAllScoreLimitedGamesAsync();
         }
 
     }
