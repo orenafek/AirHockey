@@ -26,25 +26,23 @@ namespace HockeyApp
         public MainMenu()
         {
             this.InitializeComponent();
-            
         }
-
-       
-
+   
         private void BtnGame_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (StartGamePage), null);
+            Frame.Navigate(typeof (StartGamePage), vc);
         }
 
         private void BtnScoreBoard_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ScoreBoard),null);
+            Frame.Navigate(typeof(ScoreBoard), vc);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Utils.EnableNavigateButton();
         }
+
 
         
     }

@@ -46,7 +46,7 @@
                 <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Click="BtnGame_OnClick" Margin="10,20,10,20" />
                 <Button x:Name="BtnScoreBoard" Content="Scoreboard" Style="{StaticResource RedButton}"  Click="BtnScoreBoard_OnClick" Margin="10,20,10,0" />
             </RelativePanel>
-            <local:VolumeControl Grid.Row="2" VerticalAlignment="Bottom" Name="VolumeControl" />
+            <local:VolumeControl Grid.Row="2" VerticalAlignment="Bottom" x:Name="vc" />
         </Grid>
     </Grid>
 </Page>
