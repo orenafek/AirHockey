@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HockeyApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,20 @@ namespace HockeyApp
     /// </summary>
     public sealed partial class ScoreBoard : Page
     {
+        ScoreboardViewModel viewModel = new ScoreboardViewModel(App.MobileService);
+
         public ScoreBoard()
         {
             this.InitializeComponent();
+            //viewModel.GetAllTimeLimitedGamesAsync();
+            this.DataContext = viewModel;
         }
+
+        async protected override void OnNavigatedTo(NavigationEventArgs args)
+        {
+            await viewModel.GetAllTimeLimitedGamesAsync();
+            await viewModel.GetAllScoreLimitedGamesAsync();
+        }
+
     }
 }
