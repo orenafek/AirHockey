@@ -32,7 +32,7 @@ namespace HockeyApp
             this.DataContext = viewModel;
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs args)
+        async protected override void OnNavigatedTo(NavigationEventArgs args)
         {
             await viewModel.GetAllTimeLimitedGamesAsync();
             await viewModel.GetAllScoreLimitedGamesAsync();

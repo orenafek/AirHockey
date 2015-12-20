@@ -29,8 +29,10 @@ namespace HockeyApp
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
 
+        //const string serviceUrl = "https://airhockeymobileservice.azure-mobile.net/";
         const string serviceUrl = "http://localhost:6588/";
-        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
+        //const string appKey = "oFXUeQfzLuYFVHtraeoffZRnuJSaHl45";
+        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl/*, appKey*/);
 
 
         public App()
