@@ -23,6 +23,7 @@ namespace HockeyApp
         private DeviceInformationCollection devices = null;
         private RfcommDeviceService service = null;
         private StreamSocket socket = null;
+        private StreamSocketListener listener = null;
         public static DataWriter writer = null;
 
         public BTConnecting()
@@ -45,33 +46,10 @@ namespace HockeyApp
         private ConnectionManager BTConnectionManager { get; set; }
         private async void Ts_led_OnToggled(object sender, RoutedEventArgs e)
         {
-            int isOn = (ts_led.IsOn) ? 1 : 2;
+            string isOn = (ts_led.IsOn) ? "1" : "2";
             writer = new DataWriter(socket.OutputStream);
-            writer.WriteInt32(isOn);
+            writer.WriteString(isOn);
             await writer.StoreAsync();
-        }
-
-        private async void PairAppToArduino()
-        {
-            Status.Text = "Connecting To Arduino...";
-            PeerFinder.AlternateIdentities["Bluetooth:Paired"] = "";
-            var pairedDevices = await PeerFinder.FindAllPeersAsync();
-
-            if (pairedDevices.Count == 0)
-            {
-                Utils.Show(new MessageDialog("No Pairing Devices Were Found :("),new List<UICommand>() {new UICommand("OK")} );
-                return;
-            }
-
-            foreach (var device in pairedDevices)
-            {
-                if (device.DisplayName == "HC-06")
-                {
-                    BTConnectionManager.Connect(device.HostName);
-                    Status.Text = "Connected to Arduino !";
-                    continue;
-                }
-            }
         }
 
         private void Btn_Connect_OnClick(object sender, RoutedEventArgs e)
@@ -127,10 +105,13 @@ namespace HockeyApp
                         {
                             service = await RfcommDeviceService.FromIdAsync(device.Id);
                             socket = new StreamSocket();
-                            Status.Text = "Connected";
+                            listener = new StreamSocketListener();
+                            listener.ConnectionReceived += Listener_ConnectionReceived;
                             await socket.ConnectAsync(service.ConnectionHostName,
                                 service.ConnectionServiceName);
                             ts_led.IsEnabled = true;
+                            Status.Text = "Connected";
+                            break;
                         }
 
                         catch (Exception ex) { }
@@ -142,6 +123,21 @@ namespace HockeyApp
             {
                 Utils.Show(new MessageDialog("No Devices Were Found :("),null);
             }
+        }
+
+        private void Listener_ConnectionReceived(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
+        {
+            
+        }
+
+        private async void btn_ON_OFF_Click(object sender, RoutedEventArgs e)
+        {
+            /*btn_ON_OFF.Content = "SENDING";
+            writer = new DataWriter(socket.OutputStream);
+            string isOn = btn_ON_OFF.Content.ToString() == "ON" ? "1" : "2";
+            writer.WriteString("1");
+            await writer.StoreAsync();
+            btn_ON_OFF.Content = isOn == "ON" ? "OFF" : "ON";*/
         }
     }
 }

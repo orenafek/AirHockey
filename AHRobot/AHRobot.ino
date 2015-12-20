@@ -35,7 +35,7 @@ void setup()
   pinMode(38,OUTPUT);  // ENABLE MOTOR
   pinMode(A0,OUTPUT);  // STEP MOTOR
   pinMode(A1,OUTPUT);  // DIR MOTOR
-  // Y_AXIS (Y-LEFT)
+/*  // Y_AXIS (Y-LEFT)
   pinMode(A2,OUTPUT);  // ENABLE MOTOR
   pinMode(A6,OUTPUT);  // STEP MOTOR
   pinMode(A7,OUTPUT);  // DIR MOTOR
@@ -43,6 +43,7 @@ void setup()
   pinMode(A8,OUTPUT);  // ENABLE MOTOR
   pinMode(46,OUTPUT);  // STEP MOTOR
   pinMode(48,OUTPUT);  // DIR MOTOR 
+*/
 
   pinMode(A3,OUTPUT);  // DEBUG PIN FOR OSCILLOSCOPE TIME MEASURES
 
@@ -57,8 +58,9 @@ void setup()
 
   // Disable Motors
   digitalWrite(38,HIGH);
-  digitalWrite(A2,HIGH);
+/*  digitalWrite(A2,HIGH);
   digitalWrite(A8,HIGH);
+*/
 
   Serial.begin(115200);
   Serial.println("AHR Robot version 1.05");
@@ -71,6 +73,7 @@ void setup()
   // Robot positions initialization
   defense_position = ROBOT_DEFENSE_POSITION;   // Robot y axis defense position
   attack_position = ROBOT_DEFENSE_ATTACK_POSITION;   // Robot y axis position for defense+attack
+
 
   //LED blink
   for (uint8_t k=0;k<4;k++)
@@ -101,7 +104,7 @@ void setup()
   dir_x = 0;
   TCNT1 = 0;
 
-  // We use TIMER 3 for stepper motor Y AXIS 
+/*  // We use TIMER 3 for stepper motor Y AXIS 
   // STEPPER MOTORS INITIALIZATION
   // TIMER3 CTC MODE
   TCCR3B &= ~(1<<WGM13);
@@ -120,7 +123,7 @@ void setup()
   OCR3A = ZERO_SPEED;   // Motor stopped
   dir_y = 0;
   TCNT3 = 0;
-
+*/
   //Initializing init position
   position_x = ROBOT_INITIAL_POSITION_X*X_AXIS_STEPS_PER_UNIT;
   position_y = ROBOT_INITIAL_POSITION_Y*Y_AXIS_STEPS_PER_UNIT;
@@ -134,9 +137,9 @@ void setup()
 
   // Enable steppers
   digitalWrite(38,LOW);   // X-axis
-  digitalWrite(A2,LOW);   // Y-axis left
+/*  digitalWrite(A2,LOW);   // Y-axis left
   digitalWrite(A8,LOW);   // Z-axis (Y-axis right)
-
+*/
   // Output parameters
   Serial.print("Max_acceleration_x: ");
   Serial.println(max_acceleration_x);

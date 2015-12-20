@@ -49,6 +49,7 @@ ISR(TIMER1_COMPA_vect)
   CLR(PORTF,0);
 }
 
+/*
 // TIMER 3 : STEPPER MOTOR SPEED CONTROL Y-AXIS  (2 Motors, left and right)
 ISR(TIMER3_COMPA_vect)
 {
@@ -72,6 +73,7 @@ ISR(TIMER3_COMPA_vect)
   CLR(PORTF,6);
   CLR(PORTL,3);
 }
+*/
 
 // We use a ramp for acceleration and deceleration
 // To calculate the point we should start to decelerate we use this formula:
@@ -122,6 +124,7 @@ void positionControl()
       setMotorXSpeed(-target_speed_x,dt);
   }
 
+/*
   // Y AXIS
   temp = (long)speed_y*speed_y;
   temp = temp/(1800*(long)acceleration_y);
@@ -141,6 +144,7 @@ void positionControl()
       setMotorYSpeed(-target_speed_y,dt);
   }
   CLR(PORTF,3); // for external timing debug
+  */
 }
 
 // Speed could be positive or negative
@@ -203,6 +207,7 @@ void setMotorXSpeed(int16_t tspeed, int16_t dt)
     TCNT1 = 0;
 }
 
+/*
 // Speed could be positive or negative
 void setMotorYSpeed(int16_t tspeed,int16_t dt)
 { 
@@ -276,6 +281,7 @@ void setMotorYSpeed(int16_t tspeed,int16_t dt)
   if (TCNT3 > OCR3A)
     TCNT3 = 0;
 }
+*/
 
 // Set speed on each axis in steps/sec
 void setSpeedS(int target_sx, int target_sy)

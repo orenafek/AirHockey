@@ -65,6 +65,8 @@ void robotStrategy()
         attack_time = 0;
         break;
       case 1:
+      case 2:
+      case 3:
         // Defense mode (only move on X axis on the defense line)
         com_pos_y = defense_position;
         com_pos_x = predict_x;
@@ -72,7 +74,7 @@ void robotStrategy()
         setPosition(com_pos_x,com_pos_y);
         attack_time = 0;
         break;
-      case 2:
+/*      case 2:
         // Defense+attack
         if (predict_time_attack<180)  // If time is less than 180ms we start the attack
           {
@@ -167,6 +169,7 @@ void robotStrategy()
             }
           }
         break;
+*/        
       case 4:
         // The puck came from a bounce
         // Only defense now (we could improve this in future)
