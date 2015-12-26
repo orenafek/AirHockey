@@ -37,8 +37,49 @@
                     <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40"
                             FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
                 </StackPanel>
+                <Border Grid.Row="2" Grid.RowSpan="2">
+                    <StackPanel>                        <!-- Style="{StaticResource PanelStyle1}" Width="400-->
+                        <ListView x:Name="RankingsListView" ItemsSource="{Binding TimeLimitedGames}" SelectionMode="None">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
 
-                <!--<ListBox x:Name="lb_Players" Grid.Row="2"  ItemsSource="{Binding Players}" DisplayMemberPath="Name" Width="auto" Height="auto"/>-->
+                            <ListView.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Rank"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
+                                    <TextBlock Grid.Column="1" Text="Player"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
+                                    <TextBlock Grid.Column="2" Text="Score"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
+
+                                </Grid>
+                            </ListView.Header>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Path=Rank}" Foreground="White"/>                                        <!-- Style="{StaticResource PlayerRankTextStyle}"-->
+                                        <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1"/>                                        <!-- Style="{StaticResource ListItemTextStyle}"-->
+                                        <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2"/>                                        <!-- Style="{StaticResource ListItemTextStyle}" TextAlignment="Right"-->
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button Content="Refresh" x:Name="RefreshRankings"/>
+                    </StackPanel>
+                </Border>
+
             </Grid>
         </Grid>
     </Grid>

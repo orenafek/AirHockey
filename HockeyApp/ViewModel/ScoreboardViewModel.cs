@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HockeyApp.ViewModel
 {
-    class HighscoreViewModel : INotifyPropertyChanged
+    class ScoreboardViewModel : INotifyPropertyChanged
     {
         MobileServiceClient _client;
 
-        public HighscoreViewModel(MobileServiceClient client)
+        public ScoreboardViewModel(MobileServiceClient client)
         {
             _client = client;
         }
