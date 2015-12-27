@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -34,7 +35,7 @@ namespace HockeyApp
             CountDownTimeSpan = TimeSpan.FromSeconds(20);
             tb_Timer.Text = showTime();
             Timer.Start();
-            
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 
             //EndTime = (EndTime == DateTime.MinValue) ? DateTime.Now + (TimeSpan)
         }

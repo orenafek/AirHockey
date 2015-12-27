@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Bluetooth.Rfcomm;
+using Windows.Devices.Enumeration;
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -37,7 +41,52 @@ namespace HockeyApp
         public string PlayerName { get; set; }
     }
 
-    
+    public class Bluetooth
+    {
+        private static bool _isConnected = false;
+        private static DeviceInformationCollection devices = null;
+        private static RfcommDeviceService service = null;
+        private static StreamSocket socket = null;
+        private static StreamSocketListener listener = null;
+        public static DataWriter writer = null;
+        public static bool isConnected { get { return _isConnected; } set { _isConnected = value; } }
+        public static async void ConnectToBoard()
+        {
+            var devices = await DeviceInformation.FindAllAsync();
+            if (devices.Count > 0)
+            {
+                foreach (var device in devices)
+                {
+                    if (device.Name == "HC-06")
+                    {
+                        try
+                        {
+                            service = await RfcommDeviceService.FromIdAsync(device.Id);
+                            socket = new StreamSocket();
+                            listener = new StreamSocketListener();
+                            listener.ConnectionReceived += Listener_ConnectionReceived;
+                            await socket.ConnectAsync(service.ConnectionHostName,
+                                service.ConnectionServiceName);
+                            isConnected = true;
+                            break;
+                        }
+
+                        catch (Exception ex) { }
+                    }
+                }
+            }
+
+            else
+            {
+                Utils.Show(new MessageDialog("No Devices Were Found :("), null);
+            }
+        }
+
+        private static void Listener_ConnectionReceived(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
+        {
+
+        }
+    }
     public class Utils
     {
         private static Windows.UI.Popups.IUICommand msgResponseAsyncOperation { get; set; }

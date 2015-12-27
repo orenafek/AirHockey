@@ -26,10 +26,13 @@ namespace HockeyApp
         public MainMenu()
         {
             this.InitializeComponent();
+            
+
         }
    
         private void BtnGame_OnClick(object sender, RoutedEventArgs e)
         {
+           
             Frame.Navigate(typeof (StartGamePage), vc);
         }
 
@@ -43,7 +46,15 @@ namespace HockeyApp
             Utils.EnableNavigateButton();
         }
 
+        private void btn_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Settings), vc);
+        }
 
-        
+
+        private void btn_Playground_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(BounceTry), null);
+        }
     }
 }

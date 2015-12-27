@@ -48,7 +48,7 @@ namespace HockeyApp
 
         private double volumeKeeper = 0;
 
-        public  void Mute(Button btn)
+        public void Mute(Button btn)
         {
             btn.Style = (Application.Current as App).MuteStyle;
             volumeKeeper = BackgroundVolume;
