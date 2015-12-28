@@ -13,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Foundation;
 
 namespace HockeyApp
 {
@@ -47,8 +48,10 @@ namespace HockeyApp
         private static DeviceInformationCollection devices = null;
         private static RfcommDeviceService service = null;
         private static StreamSocket socket = null;
-        private static StreamSocketListener listener = null;
+        public static StreamSocketListener Listener = null;
         public static DataWriter writer = null;
+        public static DataReader reader = null;
+        public static bool isSocketOpen { get { return socket != null; } }
         public static bool isConnected { get { return _isConnected; } set { _isConnected = value; } }
         public static async void ConnectToBoard()
         {
@@ -63,10 +66,11 @@ namespace HockeyApp
                         {
                             service = await RfcommDeviceService.FromIdAsync(device.Id);
                             socket = new StreamSocket();
-                            listener = new StreamSocketListener();
-                            listener.ConnectionReceived += Listener_ConnectionReceived;
+                            //Listener = new StreamSocketListener();
+                            //Listener.ConnectionReceived += listenerHandler;
                             await socket.ConnectAsync(service.ConnectionHostName,
                                 service.ConnectionServiceName);
+                            reader = new DataReader(socket.InputStream);
                             isConnected = true;
                             break;
                         }
@@ -81,11 +85,43 @@ namespace HockeyApp
                 Utils.Show(new MessageDialog("No Devices Were Found :("), null);
             }
         }
-
-        private static void Listener_ConnectionReceived(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
+        public async void Write(string Msg)
         {
-
+            if (!isConnected){ return;}
+            writer = new DataWriter(socket.OutputStream);
+            writer.WriteString(Msg);
+            await writer.StoreAsync();
         }
+
+        public static void Disconnect(string disconnectReason)
+        {
+            if (writer != null)
+            {
+                writer.DetachStream();
+                writer = null;
+            }
+
+            if (reader != null)
+            {
+                reader.DetachStream();
+                reader = null;
+            }
+
+            if (service != null)
+            {
+                service.Dispose();
+                service = null;
+            }
+            
+            if (socket != null)
+            {
+                socket.Dispose();
+                socket = null;
+            }
+
+            Utils.Show(new MessageDialog(disconnectReason), null);
+        }
+
     }
     public class Utils
     {

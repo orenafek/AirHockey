@@ -25,7 +25,7 @@ namespace HockeyApp
         private StreamSocket socket = null;
         private StreamSocketListener listener = null;
         public static DataWriter writer = null;
-
+        
         public BTConnecting()
         {
             this.InitializeComponent();

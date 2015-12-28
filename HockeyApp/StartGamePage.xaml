@@ -34,16 +34,19 @@
                             IsEnabled="False" />
                 </StackPanel>
             </StackPanel>
-            <Canvas x:Name="ChooseTimeOrScore" Grid.Row="2" Visibility="Collapsed">
-                <Canvas.Resources>
-
-                </Canvas.Resources>
-                <TextBlock x:Name="tb_greetingOutput" />
-                <Button x:Name="btn_byTime" Style="{StaticResource RedButton}" Content="Limit by Time"
-                        Canvas.Left="50" Canvas.Top="50" BorderBrush="White" Click="BtnOption_OnClick" />
-                <Button x:Name="btn_byScore" Style="{StaticResource RedButton}" Content="Limit by Score"
-                        Canvas.Left="50" Canvas.Top="220" BorderBrush="White" Click="BtnOption_OnClick" />
-            </Canvas>
+            
+            <Grid x:Name="ChooseTimeOrScore" Grid.Row="2" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,50,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="150"  />
+                    <RowDefinition Height="150"  />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="tb_greetingOutput" Grid.Row="0" />
+                <Button x:Name="btn_byTime" Grid.Row="1" Style="{StaticResource RedButton}" Content="Limit by Time"
+                       BorderBrush="White" Click="BtnOption_OnClick" />
+                <Button x:Name="btn_byScore" Grid.Row="2" Style="{StaticResource RedButton}" Content="Limit by Score"
+                        BorderBrush="White" Click="BtnOption_OnClick" />
+            </Grid>
             
             <local:VolumeControl x:Name="vc" Grid.Row="2" VerticalAlignment="Bottom" />
         </Grid>
