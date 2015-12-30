@@ -129,6 +129,7 @@ namespace HockeyApp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            Bluetooth.Disconnect("");
             deferral.Complete();
         }
 
@@ -150,6 +151,8 @@ namespace HockeyApp
         {
             get { return Resources["btn_SoundControl_on"] as Style; }
         }
+
+        
 
 
     }

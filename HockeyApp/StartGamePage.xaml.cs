@@ -46,7 +46,7 @@ namespace HockeyApp
                 ChooseTimeOrScore.Visibility = Visibility.Visible;
             }
         }
-
+        
         private void NameInput_OnTextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
             inputButton.IsEnabled = ((TextBox) sender).Text != string.Empty;

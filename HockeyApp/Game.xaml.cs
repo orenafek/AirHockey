@@ -30,6 +30,7 @@ namespace HockeyApp
     /// </summary>
     public sealed partial class Game : Page
     {
+        private TimeSpan second = TimeSpan.Zero;
         private const int SCORE_LIMIT = 5;
         private enum Command
         {
@@ -47,29 +48,28 @@ namespace HockeyApp
         
         public Game()
         {
-            this.InitializeComponent();
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-
+            Bluetooth.ConnectToBoard();
             //EndTime = (EndTime == DateTime.MinValue) ? DateTime.Now + (TimeSpan)
         }
 
         private string showTime()
         {
-            return CountDownTimeSpan.ToString().Substring(3); // format is MM:SS
+            return TimeSpaner.ToString().Substring(3); // format is MM:SS
         }
 
         private void stopTimer()
         {
-            if (Timer.IsEnabled && CountDownTimeSpan != TimeSpan.Zero) {Timer.Stop();}
+            if (Timer.IsEnabled && TimeSpaner != TimeSpan.Zero) {Timer.Stop();}
         }
 
         private void resumeTimer()
         {
-            if(!Timer.IsEnabled && CountDownTimeSpan != TimeSpan.Zero) { Timer.Start();}
+            if(!Timer.IsEnabled && TimeSpaner != TimeSpan.Zero) { Timer.Start();}
         }
 
         private void DispatcherTimer_Tick(object sender, object eo)
         {
+
             if(command != Command.EMPTY)
             {
                 switch (command)
@@ -77,7 +77,7 @@ namespace HockeyApp
                     case Command.START: //souldn't get here
                         break;
                     case Command.TERMINATE:
-                        stopGame();
+                        stopGame(false);
                         break;
                     case Command.GOAL_ROBOT:
                         UpdateScore(false);           
@@ -91,44 +91,50 @@ namespace HockeyApp
 
                 command = Command.EMPTY;
             }
-            if (CountDownTimeSpan.Milliseconds == 0)
+            second += TimeSpan.FromMilliseconds(10);
+            if(second < TimeSpan.FromMilliseconds(400))
             {
-                if (Countdown) // by time : 
-                {
-                    CountDownTimeSpan -= TimeSpan.FromSeconds(1);
-                }
-
-                if (!Countdown) // by score : 
-                {
-                    CountDownTimeSpan += TimeSpan.FromSeconds(1);
-                }
-
-                tb_Timer.Text = showTime();
-                if (Countdown && CountDownTimeSpan == TimeSpan.FromSeconds(0))
-                {
-                    stopGame();
-                }
+                return;
             }
+
+            second = TimeSpan.Zero;
+
+            if (Countdown) // by time : 
+            {
+                TimeSpaner -= TimeSpan.FromSeconds(1);
+            }
+
+            if (!Countdown) // by score : 
+            {
+                TimeSpaner += TimeSpan.FromSeconds(1);
+            }
+
+            tb_Timer.Text = showTime();
+            if (Countdown && TimeSpaner == TimeSpan.FromSeconds(0))
+            {
+                stopGame(false);
+            }
+            
         }
 
         private void UpdateScore(bool UserScored)
         {
-            int userScore = int.Parse(UserScore.Text);
-            int robotScore = int.Parse(RobotScore.Text);
+            int userScore = int.Parse(tb_UserScore.Text);
+            int robotScore = int.Parse(tb_RobotScore.Text);
 
             if (UserScored)
             {
-                UserScore.Text = (userScore + 1).ToString();
+                tb_UserScore.Text = (userScore + 1).ToString();
             }
 
             if (!UserScored)
             {
-                RobotScore.Text = (robotScore + 1).ToString();
+                tb_RobotScore.Text = (robotScore + 1).ToString();
             }
 
             if(Params.ByScore && (userScore == SCORE_LIMIT || robotScore == SCORE_LIMIT))
             {
-                stopGame();
+                stopGame(false);
             }
         }
 
@@ -137,16 +143,19 @@ namespace HockeyApp
             //TODO: Insert new score to the DB
             Frame.Navigate(typeof(ScoreBoard), null);
         }
-        private void stopGame()
+        private void stopGame(bool navigation)
         {
             Timer.Stop();
-            MessageDialog msgDialog = new MessageDialog("Game is Over !");
-            UICommand OK = new UICommand("OK");
-            OK.Invoked += Popup_OK_Invoked;
-            Utils.Show(msgDialog, new List<UICommand> { OK });
+            Bluetooth.Write(((char)Command.TERMINATE).ToString());
+            if (!navigation)
+            {
+                MessageDialog msgDialog = new MessageDialog("Game is Over !");
+                UICommand OK = new UICommand("OK");
+                OK.Invoked += Popup_OK_Invoked;
+                Utils.Show(msgDialog, new List<UICommand> { OK });
+            }
         }
-
-        private TimeSpan CountDownTimeSpan { get; set; }
+        private TimeSpan TimeSpaner { get; set; }
         public DateTime EndTime { get; set; }
         public DispatcherTimer Timer { get; set; }
 
@@ -163,28 +172,50 @@ namespace HockeyApp
             }
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedFrom(e);
             Params = e.Parameter as Session;
+            this.InitializeComponent();
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromMilliseconds(10);
+            Timer.Tick += DispatcherTimer_Tick;
+            if (Params.ByTime)
+            {
+                TimeSpaner = TimeSpan.FromMinutes(3);
+            }
+
+            if (Params.ByScore)
+            {
+                TimeSpaner = TimeSpan.Zero;
+            }
+            tb_Timer.Text = showTime();
+            Timer.Start();
+
+        
+            tb_player.Text = Params.PlayerName;
+
             if (!Bluetooth.isConnected)
             {
                 Bluetooth.ConnectToBoard();
             }
 
-            Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromMilliseconds(10);
-            Timer.Tick += DispatcherTimer_Tick;
-            CountDownTimeSpan = TimeSpan.FromSeconds(20);
-            tb_Timer.Text = showTime();
-            Timer.Start();
-           
+            //reset Score : 
+            tb_UserScore.Text = 0.ToString();
+            tb_RobotScore.Text = 0.ToString();
 
+             Bluetooth.Write(((char)Command.START).ToString());
+             
+             ReceiveStringLoop(Bluetooth.Reader);
         }
 
-        private async void  ReceiveStringLoop()
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            DataReader chatReader = Bluetooth.reader;
+            stopGame(true);
+        }
+
+        private async void ReceiveStringLoop(DataReader chatReader)
+        {
             try
             {
                 uint size = await chatReader.LoadAsync(sizeof(uint));
@@ -202,22 +233,29 @@ namespace HockeyApp
                     return;
                 }
 
-                command = (Command)(char.Parse(chatReader.ReadString(stringLength)));
+                string a = chatReader.ReadString(stringLength);
+                Debug.Text = a;
 
-                ReceiveStringLoop();
+                ReceiveStringLoop(chatReader);
             }
             catch (Exception ex)
             {
-                if (!Bluetooth.isSocketOpen)
+                lock (this)
                 {
-                    // Do not print anything here -  the user closed the socket.
-                    // HResult = 0x80072745 - catch this (remote device disconnect) ex = {"An established connection was aborted by the software in your host machine. (Exception from HRESULT: 0x80072745)"}
-                }
-                else
-                {
-                    Bluetooth.Disconnect("Read stream failed with error: " + ex.Message);
+                    if (!Bluetooth.isSocketOpen)
+                    {
+                        // Do not print anything here -  the user closed the socket.
+                        // HResult = 0x80072745 - catch this (remote device disconnect) ex = {"An established connection was aborted by the software in your host machine. (Exception from HRESULT: 0x80072745)"}
+                    }
+                    else
+                    {
+                        Bluetooth.Disconnect("Read stream failed with error: " + ex.Message);
+                    }
                 }
             }
         }
+        
+
+        
     }
 }

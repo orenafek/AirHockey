@@ -14,15 +14,14 @@
         <Grid Background="Black">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="128" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="14*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock x:Name="UpperPadding" Grid.Row="0" Text="" />
             <TextBlock x:Name="lowerPadding" Grid.Row="3" Text="" />
-            <Image x:Name="logo" Grid.Row="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch"
-                   Margin="5,0,0,0" />
-            <StackPanel x:Name="NamePanel" Grid.Row="2">
+            <Image x:Name="logo" Grid.Row="1" Source="Assets/Mainlogo.jpg" HorizontalAlignment="Stretch" />
+            <StackPanel x:Name="NamePanel" Grid.Row="2" Margin="0,30,0,0">
 
                 <TextBlock Text="Please enter your full name:" HorizontalAlignment="Center"
                            FontFamily="Global Monospace" FontSize="18.667" />
@@ -38,8 +37,8 @@
             <Grid x:Name="ChooseTimeOrScore" Grid.Row="2" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,50,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="150"  />
-                    <RowDefinition Height="150"  />
+                    <RowDefinition Height="120"  />
+                    <RowDefinition Height="120"  />
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="tb_greetingOutput" Grid.Row="0" />
                 <Button x:Name="btn_byTime" Grid.Row="1" Style="{StaticResource RedButton}" Content="Limit by Time"

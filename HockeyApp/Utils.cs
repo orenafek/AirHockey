@@ -50,9 +50,18 @@ namespace HockeyApp
         private static StreamSocket socket = null;
         public static StreamSocketListener Listener = null;
         public static DataWriter writer = null;
-        public static DataReader reader = null;
+        private static DataReader reader = null;
+        public static DataReader Reader {
+            get
+            {
+               var r = new DataReader(socket.InputStream);
+                r.InputStreamOptions = InputStreamOptions.Partial;
+                return r;
+            }
+        }
         public static bool isSocketOpen { get { return socket != null; } }
         public static bool isConnected { get { return _isConnected; } set { _isConnected = value; } }
+        public static bool isWritten { get; set; }
         public static async void ConnectToBoard()
         {
             var devices = await DeviceInformation.FindAllAsync();
@@ -71,6 +80,8 @@ namespace HockeyApp
                             await socket.ConnectAsync(service.ConnectionHostName,
                                 service.ConnectionServiceName);
                             reader = new DataReader(socket.InputStream);
+                            writer = new DataWriter(socket.OutputStream);
+                            
                             isConnected = true;
                             break;
                         }
@@ -85,12 +96,14 @@ namespace HockeyApp
                 Utils.Show(new MessageDialog("No Devices Were Found :("), null);
             }
         }
-        public async void Write(string Msg)
+        public static async void Write(string Msg)
         {
+            isWritten = false;
             if (!isConnected){ return;}
-            writer = new DataWriter(socket.OutputStream);
+            //writer = new DataWriter(socket.OutputStream);
             writer.WriteString(Msg);
             await writer.StoreAsync();
+            isWritten = true;
         }
 
         public static void Disconnect(string disconnectReason)

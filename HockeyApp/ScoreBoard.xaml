@@ -11,15 +11,15 @@
         <Grid Background="Black">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition Height="128" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="14*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock x:Name="UpperPadding" Grid.Row="0" />
             <TextBlock x:Name="lowerPadding" Grid.Row="3" />
-            <Image x:Name="logo" Grid.Row="1" Source="Assets/Mainlogo.png" HorizontalAlignment="Stretch"
+            <Image x:Name="logo" Grid.Row="1" Source="Assets/Mainlogo.jpg" HorizontalAlignment="Stretch"
                    Margin="5,0,0,0" />
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Margin="0,30,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="40" />

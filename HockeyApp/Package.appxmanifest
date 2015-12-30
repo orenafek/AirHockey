@@ -27,13 +27,12 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="bluetooth" />
+    <DeviceCapability Name="proximity" />
     <DeviceCapability Name="bluetooth.rfcomm">
       <Device Id="any">
         <Function Type="name:serialPort" />
       </Device>
     </DeviceCapability>
-    <DeviceCapability Name="bluetooth" />
-    <DeviceCapability Name="proximity" />
-    
   </Capabilities>
 </Package>

@@ -92,7 +92,11 @@
     <Content Include="Assets\28 Days Later.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\background.png" />
     <Content Include="Assets\bt_icon.png" />
+    <Content Include="Assets\MainLogo.jpg" />
+    <Content Include="Assets\MainLogo2.png" />
+    <Content Include="Assets\MainLogoWhite.png" />
     <Content Include="Assets\orange juice 2.0.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -150,7 +154,6 @@
     <None Include="HockeyApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\MainLogo.png" />
     <Content Include="Assets\PlayButton.png" />
     <Content Include="Assets\ScoreboardButton.png" />
     <Content Include="Assets\ScoreTable.PNG" />
@@ -164,13 +167,14 @@
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\‏‏‏‏‏‏MainLogo3.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>

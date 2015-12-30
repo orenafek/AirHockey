@@ -30,8 +30,15 @@ namespace HockeyApp
 
         private void btn_BTConnect_Click(object sender, RoutedEventArgs e)
         {
-            Bluetooth.ConnectToBoard();
-            btn_BTConnect.Content = Bluetooth.isConnected ? "Disconnect" : "Connect";
+            if (Bluetooth.isConnected) {
+                Bluetooth.Disconnect("Disconnected");
+                btn_BTConnect.Content = "Connect";
+            }
+
+            if(!Bluetooth.isConnected) {
+                Bluetooth.ConnectToBoard();
+                btn_BTConnect.Content = "Disconnect";
+            }
         }
 
         private void btn_shutMusicDown_Click(object sender, RoutedEventArgs e)
