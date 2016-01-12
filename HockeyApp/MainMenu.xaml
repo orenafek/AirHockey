@@ -46,7 +46,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <TextBlock x:Name="UpperPadding" Grid.Row="0"></TextBlock>
-            <Button x:Name="btn_Playground" Content="PlayGround" Grid.Row="0" Background="Red" Click="btn_Playground_Click" Visibility="Collapsed" />
+            <Button x:Name="btn_Playground" Content="PlayGround" Grid.Row="0" Background="Red" Click="btn_Playground_Click" Visibility="Visible" />
             <Image x:Name="Logo" Grid.Row ="1" HorizontalAlignment="Stretch" Source="Assets/MainLogo.jpg"/>
             <RelativePanel x:Name="rp_options" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,60"  >
                 <Button x:Name="BtnGame" Content="Play Game" Style="{StaticResource RedButton}" Click="BtnGame_OnClick" Margin="10,20,10,20" />

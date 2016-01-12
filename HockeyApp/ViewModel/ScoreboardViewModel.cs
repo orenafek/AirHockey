@@ -81,7 +81,7 @@ namespace HockeyApp.ViewModel
             try
             {
                 IMobileServiceTable<ScoreLimitedGame> table = _client.GetTable<ScoreLimitedGame>();
-                ScoreLimitedGames = await table.OrderBy(x => x.Name).ToCollectionAsync();
+                ScoreLimitedGames = await table.OrderBy(x => x.Rank).ToCollectionAsync();
             }
             catch (MobileServiceInvalidOperationException ex)
             {
@@ -137,7 +137,7 @@ namespace HockeyApp.ViewModel
             try
             {
                 IMobileServiceTable<TimeLimitedGame> table = _client.GetTable<TimeLimitedGame>();
-                TimeLimitedGames = await table.OrderBy(x => x.Name).ToCollectionAsync();
+                TimeLimitedGames = await table.OrderBy(x => x.Rank).ToCollectionAsync();
             }
             catch (MobileServiceInvalidOperationException ex)
             {

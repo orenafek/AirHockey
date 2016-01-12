@@ -54,7 +54,7 @@ namespace HockeyApp
 
         private void btn_Playground_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(BounceTry), null);
+            //Frame.Navigate(typeof(OnlyBT), null);
         }
     }
 }
