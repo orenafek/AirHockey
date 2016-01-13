@@ -27,6 +27,8 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer" />
+    <Capability Name="privateNetworkClientServer" />
     <DeviceCapability Name="bluetooth" />
     <DeviceCapability Name="proximity" />
     <DeviceCapability Name="bluetooth.rfcomm">

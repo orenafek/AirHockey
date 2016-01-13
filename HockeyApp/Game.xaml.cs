@@ -21,6 +21,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using System.Threading.Tasks;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace HockeyApp
@@ -213,6 +214,8 @@ namespace HockeyApp
         {
             stopGame(true);
         }
+
+       
 
         //private async void ReceiveStringLoop(DataReader chatReader)
         //{

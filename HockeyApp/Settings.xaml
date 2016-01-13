@@ -42,6 +42,9 @@
                 <Button x:Name="btn_BTConnect" Content="Connect" Style="{StaticResource RedButton}" Click="btn_BTConnect_Click" Margin="10,20,10,20" />
                 <Image x:Name="bt_icon" RelativePanel.RightOf="btn_BTConnect" Width="50" Height="50"  Margin="0,30,0,0" Source="Assets/bt_icon.png"/>
                 <Button x:Name="btn_shutMusicDown" Content="" Style="{StaticResource RedButton}"  Margin="10,20,10,0" />
+                <TextBox x:Name="tb_Msg" TextWrapping="Wrap" Text="" RelativePanel.Below="btn_BTConnect" />
+                <Button x:Name="btn_Send" RelativePanel.RightOf="tb_Msg" RelativePanel.Below="btn_BTConnect" Click="btn_Send_Click" Content="SendToWifi" Width="auto"
+                        Foreground="White" IsEnabled="False" />
             </RelativePanel>
             <Grid x:Name="grid_footer" Grid.Row="3" Height="45" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
