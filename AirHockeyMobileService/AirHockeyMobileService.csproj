@@ -275,8 +275,7 @@
     <Content Include="packages.config" />
     <Content Include="Performance\Microsoft.ServiceBus.MessagingPerformanceCounters.man" />
     <None Include="Properties\PublishProfiles\AirHockeyMobileService - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\mobile%24AirHockeyMobileService.pubxml" />
-    <None Include="Properties\PublishProfiles\mobile-AirHockeyMobileService.pubxml" />
+    <None Include="Properties\PublishProfiles\mobile-HockeyService.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

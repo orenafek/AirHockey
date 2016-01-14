@@ -46,7 +46,7 @@ namespace AirHockeyMobileService.Controllers
             // See http://stackoverflow.com/a/575799
             const string updateCommand =
                 "UPDATE r SET Rank = ((SELECT COUNT(*)+1 from {0}.TimeLimitedGames " +
-                "where PlayerScore > (select playerscore from {0}.TimeLimitedGames where Id = r.Id)))" +
+                "where (PlayerScore - RobotScore) > ((SELECT (playerscore - robotscore) AS diff FROM {0}.TimeLimitedGames WHERE Id = r.Id))))" +
                 "FROM {0}.TimeLimitedGames as r";
 
             string command = System.String.Format(updateCommand, ServiceSettingsDictionary.GetSchemaName());
@@ -59,6 +59,13 @@ namespace AirHockeyMobileService.Controllers
         public Task DeleteTimeLimitedGame(string id)
         {
              return DeleteAsync(id);
+        }
+
+        public void DeleteAll()
+        {
+            string cmd = "TRUNCATE TABLE {0}.TimeLimitedGames";
+            string command = string.Format(cmd, ServiceSettingsDictionary.GetSchemaName());
+            context.Database.ExecuteSqlCommand(command);
         }
 
     }

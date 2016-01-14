@@ -33,8 +33,8 @@
 
                 <StackPanel x:Name="stkPnl_options" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="btn_ByTime" Style="{StaticResource RedButton}" Content="By Time" Height="40"
-                            FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
-                    <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40"
+                            FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" Click="btn_changeBy_Click" />
+                    <Button x:Name="btn_ByScore" Style="{StaticResource RedButton}" Content="By Score" Height="40" Click="btn_changeBy_Click"
                             FontSize="20" BorderBrush="White" Padding="8,8,8,0" Margin="5,0" />
                 </StackPanel>
                 <Border Grid.Row="2" Grid.RowSpan="2">

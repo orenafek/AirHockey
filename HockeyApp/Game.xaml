@@ -15,7 +15,7 @@
                 <RowDefinition Height="14*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock x:Name="Debug" Foreground="Red" HorizontalAlignment="Center" Grid.Row="0" Text="DEBUG" />
+            <TextBlock x:Name="Debug" Foreground="Red" HorizontalAlignment="Center" Grid.Row="0" Text="DEBUG" Visibility="Collapsed" />
             <TextBlock x:Name="UpperPadding" Grid.Row="0" Text="" />
             <TextBlock x:Name="lowerPadding" Grid.Row="3" Text="" />
             <Image x:Name="logo" Grid.Row="1" Source="Assets/MainLogo.jpg" HorizontalAlignment="Stretch"   />

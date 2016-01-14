@@ -42,7 +42,8 @@ namespace HockeyApp
         string ip = "192.168.2.16";
         HostName host;
         bool connected = false;
-        
+        bool paused = false;
+
         private enum Command
         {
             START = 'S',
@@ -187,11 +188,13 @@ namespace HockeyApp
             if (Timer.IsEnabled)
             {
                 stopTimer();
+                paused = true;
             }
 
             else
             {
                 resumeTimer();
+                paused = false;
             }
         }
 
@@ -233,6 +236,7 @@ namespace HockeyApp
         {
             stopGame(true);
             socket.Dispose();
+            connected = false;
         }
 
         private async Task ConnectToServer()
@@ -261,6 +265,10 @@ namespace HockeyApp
                             break;
                         default:
                             break;
+                    }
+                    if (!connected)
+                    {
+                        return;
                     }
                 }
             }
