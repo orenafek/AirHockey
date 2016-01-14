@@ -30,6 +30,7 @@ namespace HockeyApp
         DataReader reader;
         string port = "8001";
         HostName host;
+
         bool ConnectedToServer { get; set; }
         public Settings()
         {
@@ -76,6 +77,7 @@ namespace HockeyApp
             listenToPackets();
             
         }
+
         private async void listenToPackets()
         {
             //await listener.BindServiceNameAsync(port);
@@ -99,9 +101,10 @@ namespace HockeyApp
                     throw;
                 }
 
-                
+
             }
         }
+
         private /*async*/ void sendStringTCP()
         {
             //    try

@@ -20,7 +20,7 @@ using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using System.Threading.Tasks;
-
+using Windows.Networking;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,6 +33,16 @@ namespace HockeyApp
     {
         private TimeSpan second = TimeSpan.Zero;
         private const int SCORE_LIMIT = 5;
+        StreamSocket socket;
+        StreamSocketListener listener;
+        DataReader reader;
+        DataWriter writer;
+        int port_int = 8001;
+        string port = "8001";
+        string ip = "192.168.2.16";
+        HostName host;
+        bool connected = false;
+        
         private enum Command
         {
             START = 'S',
@@ -49,8 +59,9 @@ namespace HockeyApp
         
         public Game()
         {
-            //Bluetooth.ConnectToBoard();
-            //EndTime = (EndTime == DateTime.MinValue) ? DateTime.Now + (TimeSpan)
+            socket = new StreamSocket();
+            host = new HostName(ip);
+
         }
 
         private string showTime()
@@ -147,6 +158,8 @@ namespace HockeyApp
         private void stopGame(bool navigation)
         {
             Timer.Stop();
+            SendToServer(Command.TERMINATE);
+
             //Bluetooth.Write(((char)Command.TERMINATE).ToString());
             if (!navigation)
             {
@@ -154,8 +167,17 @@ namespace HockeyApp
                 UICommand OK = new UICommand("OK");
                 OK.Invoked += Popup_OK_Invoked;
                 Utils.Show(msgDialog, new List<UICommand> { OK });
+
             }
         }
+        private async void SendToServer(Command c)
+        {
+            //while (!connected) { }
+            writer = new DataWriter(socket.OutputStream);
+            writer.WriteByte(Convert.ToByte((char)c));
+            await writer.StoreAsync();
+        }
+
         private TimeSpan TimeSpaner { get; set; }
         public DateTime EndTime { get; set; }
         public DispatcherTimer Timer { get; set; }
@@ -173,7 +195,7 @@ namespace HockeyApp
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             Params = e.Parameter as Session;
             this.InitializeComponent();
@@ -196,27 +218,61 @@ namespace HockeyApp
         
             tb_player.Text = Params.PlayerName;
 
-            //if (!Bluetooth.isConnected)
-            //{
-            //    Bluetooth.ConnectToBoard();
-            //}
-
             //reset Score : 
             tb_UserScore.Text = 0.ToString();
             tb_RobotScore.Text = 0.ToString();
 
-             //Bluetooth.Write(((char)Command.START).ToString());
-             
-             //ReceiveStringLoop(Bluetooth.Reader);
+            //Connecting to the local Ad-Hock Wifi Server
+            await ConnectToServer();
+            SendToServer(Command.START);
+            await listenToPackets();
+
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             stopGame(true);
+            socket.Dispose();
         }
 
-       
+        private async Task ConnectToServer()
+        {
+            await socket.ConnectAsync(host,port);
+            connected = true;
+        }
 
+        private async Task listenToPackets()
+        {
+            //await listener.BindServiceNameAsync(port);
+        
+            try
+            {
+                reader = new DataReader(socket.InputStream);
+                while (true) //TODO: while we didn't end game
+                {
+                    reader.InputStreamOptions = InputStreamOptions.Partial;
+                    uint income = await reader.LoadAsync(sizeof(uint));
+                    string s = reader.ReadString(income);
+                    switch (s)
+                    {
+                        case "R": UpdateScore(false);
+                            break;
+                        case "P": UpdateScore(true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // If this is an unknown status it means that the error is fatal and retry will likely fail.
+                if (SocketError.GetStatus(exception.HResult) == SocketErrorStatus.Unknown)
+                {
+                    throw;
+                }
+            }
+        }
         //private async void ReceiveStringLoop(DataReader chatReader)
         //{
         //    try
@@ -257,8 +313,8 @@ namespace HockeyApp
         //        }
         //    }
         //}
-        
 
-        
+
+
     }
 }
