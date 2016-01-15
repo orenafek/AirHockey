@@ -115,9 +115,6 @@
     <Compile Include="BounceTry.xaml.cs">
       <DependentUpon>BounceTry.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BTConnecting.xaml.cs">
-      <DependentUpon>BTConnecting.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
@@ -183,10 +180,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="BounceTry.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BTConnecting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
