@@ -26,6 +26,7 @@ using Windows.Networking;
 
 namespace HockeyApp
 {
+    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -33,36 +34,19 @@ namespace HockeyApp
     {
         private TimeSpan second = TimeSpan.Zero;
         private const int SCORE_LIMIT = 5;
-        StreamSocket socket;
-        StreamSocketListener listener;
-        DataReader reader;
-        DataWriter writer;
-        int port_int = 8001;
-        string port = "8001";
-        string ip = "192.168.2.16";
-        HostName host;
         bool connected = false;
         bool paused = false;
 
-        private enum Command
-        {
-            START = 'S',
-            TERMINATE = 'T',
-            GOAL_ROBOT = 'R',
-            GOAL_PLAYER = 'P',
-            EMPTY = 'E'
-        }
+        
 
-        private Command command = Command.EMPTY;
+        private Server.Command command = Server.Command.EMPTY;
 
         private Session Params { get; set; }
         private bool Countdown { get { return Params.ByTime; } }
         
         public Game()
         {
-            socket = new StreamSocket();
-            host = new HostName(ip);
-
+            Server.Initiate(UpdateScore);
         }
 
         private string showTime()
@@ -83,26 +67,26 @@ namespace HockeyApp
         private void DispatcherTimer_Tick(object sender, object eo)
         {
 
-            if(command != Command.EMPTY)
+            if(command != Server.Command.EMPTY)
             {
                 switch (command)
                 {
-                    case Command.START: //souldn't get here
+                    case Server.Command.START: //souldn't get here
                         break;
-                    case Command.TERMINATE:
+                    case Server.Command.TERMINATE:
                         stopGame(false);
                         break;
-                    case Command.GOAL_ROBOT:
+                    case Server.Command.GOAL_ROBOT:
                         UpdateScore(false);           
                         break;
-                    case Command.GOAL_PLAYER:
+                    case Server.Command.GOAL_PLAYER:
                         UpdateScore(true);
                         break;
-                    case Command.EMPTY: //souldn't get here
+                    case Server.Command.EMPTY: //souldn't get here
                         break;
                 }
 
-                command = Command.EMPTY;
+                command = Server.Command.EMPTY;
             }
             second += TimeSpan.FromMilliseconds(10);
             if(second < TimeSpan.FromMilliseconds(400))
@@ -154,16 +138,30 @@ namespace HockeyApp
         private void Popup_OK_Invoked(IUICommand command)
         {
             //TODO: Insert new score to the DB
+            Server.SendToServer(Server.Command.TERMINATE);
+            Server.Dispose();
             Frame.Navigate(typeof(ScoreBoard), null);
         }
         private void stopGame(bool navigation)
         {
             Timer.Stop();
-            SendToServer(Command.TERMINATE);
+            Server.SendToServer(Server.Command.TERMINATE);
 
             //Bluetooth.Write(((char)Command.TERMINATE).ToString());
             if (!navigation)
             {
+                int playerScore = int.Parse(tb_UserScore.Text);
+                int robotScore = int.Parse(tb_RobotScore.Text);
+                if (Params.ByTime)
+                {
+                    Utils.viewModel.AddTimeLimitedGameAsync(Params.PlayerName, DateTime.Now,playerScore,robotScore);
+                }
+
+                if (Params.ByScore)
+                {
+                    Utils.viewModel.AddScoreLimitedGameAsync(Params.PlayerName, DateTime.Now, TimeSpaner);
+                }
+
                 MessageDialog msgDialog = new MessageDialog("Game is Over !");
                 UICommand OK = new UICommand("OK");
                 OK.Invoked += Popup_OK_Invoked;
@@ -171,13 +169,7 @@ namespace HockeyApp
 
             }
         }
-        private async void SendToServer(Command c)
-        {
-            //while (!connected) { }
-            writer = new DataWriter(socket.OutputStream);
-            writer.WriteByte(Convert.ToByte((char)c));
-            await writer.StoreAsync();
-        }
+       
 
         private TimeSpan TimeSpaner { get; set; }
         public DateTime EndTime { get; set; }
@@ -188,13 +180,13 @@ namespace HockeyApp
             if (Timer.IsEnabled)
             {
                 stopTimer();
-                paused = true;
+                Server.Paused = true;
             }
 
             else
             {
                 resumeTimer();
-                paused = false;
+                Server.Paused = false;
             }
         }
 
@@ -218,7 +210,6 @@ namespace HockeyApp
             tb_Timer.Text = showTime();
             Timer.Start();
 
-        
             tb_player.Text = Params.PlayerName;
 
             //reset Score : 
@@ -226,61 +217,19 @@ namespace HockeyApp
             tb_RobotScore.Text = 0.ToString();
 
             //Connecting to the local Ad-Hock Wifi Server
-            await ConnectToServer();
-            SendToServer(Command.START);
-            await listenToPackets();
+            await Server.ConnectToServer();
+            Server.SendToServer(Server.Command.START);
+            await Server.listenToPackets();
 
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             stopGame(true);
-            socket.Dispose();
+            Server.Dispose();
             connected = false;
         }
 
-        private async Task ConnectToServer()
-        {
-            await socket.ConnectAsync(host,port);
-            connected = true;
-        }
-
-        private async Task listenToPackets()
-        {
-            //await listener.BindServiceNameAsync(port);
-        
-            try
-            {
-                reader = new DataReader(socket.InputStream);
-                while (true) //TODO: while we didn't end game
-                {
-                    reader.InputStreamOptions = InputStreamOptions.Partial;
-                    uint income = await reader.LoadAsync(sizeof(uint));
-                    string s = reader.ReadString(income);
-                    switch (s)
-                    {
-                        case "R": UpdateScore(false);
-                            break;
-                        case "P": UpdateScore(true);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (!connected)
-                    {
-                        return;
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                // If this is an unknown status it means that the error is fatal and retry will likely fail.
-                if (SocketError.GetStatus(exception.HResult) == SocketErrorStatus.Unknown)
-                {
-                    throw;
-                }
-            }
-        }
         //private async void ReceiveStringLoop(DataReader chatReader)
         //{
         //    try
@@ -322,7 +271,7 @@ namespace HockeyApp
         //    }
         //}
 
-
+       
 
     }
 }

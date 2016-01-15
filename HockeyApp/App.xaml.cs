@@ -39,6 +39,16 @@ namespace HockeyApp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
+        
+        }
+
+        private void OnResuming(object sender, object args)
+        {
+            if (Server.Connected)
+            {
+                Server.SendToServer(Server.Command.START);
+            }
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -129,6 +139,8 @@ namespace HockeyApp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            Server.SendToServer(Server.Command.TERMINATE);
+
             deferral.Complete();
         }
 

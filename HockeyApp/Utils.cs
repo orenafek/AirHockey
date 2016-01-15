@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Devices.Bluetooth.Rfcomm;
-using Windows.Devices.Enumeration;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Foundation;
-
+using Windows.Networking;
 namespace HockeyApp
 {
+    using ViewModel;
     public class Session
     {
         public Session(bool byScore, string playerName)
@@ -42,6 +37,110 @@ namespace HockeyApp
         public string PlayerName { get; set; }
     }
 
+    public class Server
+    {
+        public enum Command
+        {
+            START = 'S',
+            TERMINATE = 'T',
+            GOAL_ROBOT = 'R',
+            GOAL_PLAYER = 'P',
+            EMPTY = 'E'
+        }
+
+        static StreamSocket socket;
+        static DataReader reader;
+        static DataWriter writer;
+        static string port = "8001";
+        static string ip = "192.168.2.16";
+        static HostName host;
+        public static bool Paused { get; set; }
+        public delegate void ScoreUpdator(bool UserScored);
+        static ScoreUpdator UpdateScore;
+        public static bool Connected { get; set; }
+
+        static Server()
+        {
+            Connected = false;
+        }
+
+        public static void Initiate(ScoreUpdator updatorFunc)
+        {
+            if (Connected)
+            {
+                Dispose();
+            }
+            socket = new StreamSocket();
+            host = new HostName(ip);
+            UpdateScore = updatorFunc;
+            Connected = false;
+        }
+
+        public static async Task listenToPackets()
+        {
+            //await listener.BindServiceNameAsync(port);
+
+            try
+            {
+                reader = new DataReader(socket.InputStream);
+                while (true) //TODO: while we didn't end game
+                {
+                    reader.InputStreamOptions = InputStreamOptions.Partial;
+                    uint income = await reader.LoadAsync(sizeof(uint));
+                    string s = reader.ReadString(income);
+                    if (Paused)
+                    {
+                        continue;
+                    }
+
+                    switch (s)
+                    {
+                        case "R":
+                            UpdateScore(false);
+                            break;
+                        case "P":
+                            UpdateScore(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    if (!Connected)
+                    {
+                        return;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // If this is an unknown status it means that the error is fatal and retry will likely fail.
+                if (SocketError.GetStatus(exception.HResult) == SocketErrorStatus.Unknown)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static async Task ConnectToServer()
+        {
+            await socket.ConnectAsync(host, port);
+            Connected = true;
+        }
+
+        public static async void SendToServer(Command c)
+        {
+            //while (!connected) { }
+            writer = new DataWriter(socket.OutputStream);
+            writer.WriteByte(Convert.ToByte((char)c));
+            await writer.StoreAsync();
+        }
+
+        public static void Dispose()
+        {
+            socket.Dispose();
+            Connected = false;
+        }
+
+    }
     
     public class Utils
     {
@@ -77,6 +176,8 @@ namespace HockeyApp
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
+
+        public static ScoreboardViewModel viewModel = new ScoreboardViewModel(App.MobileService);
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HockeyApp.ViewModel
 {
-    class ScoreboardViewModel : INotifyPropertyChanged
+    public class ScoreboardViewModel : INotifyPropertyChanged
     {
         MobileServiceClient _client;
 
