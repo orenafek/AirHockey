@@ -47,7 +47,7 @@ namespace HockeyApp
         {
             if (Server.Connected)
             {
-                Server.SendToServer(Server.Command.START);
+                Server.SendToServer(Server.Command.START,Window.Current.Content as Frame);
             }
         }
 
@@ -139,7 +139,7 @@ namespace HockeyApp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
-            Server.SendToServer(Server.Command.TERMINATE);
+            Server.SendToServer(Server.Command.TERMINATE, Window.Current.Content as Frame);
 
             deferral.Complete();
         }

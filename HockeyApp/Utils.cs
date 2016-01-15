@@ -63,7 +63,6 @@ namespace HockeyApp
         {
             Connected = false;
         }
-
         public static void Initiate(ScoreUpdator updatorFunc)
         {
             if (Connected)
@@ -75,7 +74,6 @@ namespace HockeyApp
             UpdateScore = updatorFunc;
             Connected = false;
         }
-
         public static async Task listenToPackets()
         {
             //await listener.BindServiceNameAsync(port);
@@ -119,21 +117,31 @@ namespace HockeyApp
                 }
             }
         }
-
         public static async Task ConnectToServer()
         {
             await socket.ConnectAsync(host, port);
             Connected = true;
         }
-
-        public static async void SendToServer(Command c)
+        public static async void SendToServer(Command c,Frame current)
         {
             //while (!connected) { }
-            writer = new DataWriter(socket.OutputStream);
-            writer.WriteByte(Convert.ToByte((char)c));
-            await writer.StoreAsync();
-        }
+            try {
+                writer = new DataWriter(socket.OutputStream);
+                writer.WriteByte(Convert.ToByte((char)c));
+                await writer.StoreAsync();
+            } catch(Exception ex)
+            {
+                MessageDialog msgDialog = new MessageDialog("The Connection Has Been Closed.");
+                UICommand OK = new UICommand("OK");
+                OK.Invoked += (IUICommand command) =>
+                {
+                    Server.Dispose(); current.Navigate(typeof(MainMenu), null);
+                };
 
+                Utils.Show(msgDialog, new List<UICommand> { OK });
+            }
+            
+        }
         public static void Dispose()
         {
             socket.Dispose();

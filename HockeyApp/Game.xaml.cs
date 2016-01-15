@@ -138,14 +138,14 @@ namespace HockeyApp
         private void Popup_OK_Invoked(IUICommand command)
         {
             //TODO: Insert new score to the DB
-            Server.SendToServer(Server.Command.TERMINATE);
+            Server.SendToServer(Server.Command.TERMINATE,Frame);
             Server.Dispose();
             Frame.Navigate(typeof(ScoreBoard), null);
         }
         private void stopGame(bool navigation)
         {
             Timer.Stop();
-            Server.SendToServer(Server.Command.TERMINATE);
+            Server.SendToServer(Server.Command.TERMINATE,Frame);
 
             //Bluetooth.Write(((char)Command.TERMINATE).ToString());
             if (!navigation)
@@ -218,7 +218,7 @@ namespace HockeyApp
 
             //Connecting to the local Ad-Hock Wifi Server
             await Server.ConnectToServer();
-            Server.SendToServer(Server.Command.START);
+            Server.SendToServer(Server.Command.START, Frame);
             await Server.listenToPackets();
 
         }
