@@ -57,11 +57,13 @@ namespace HockeyApp
             {
                 case "btn_ByTime":
                     BtnState = ButtonState.BY_TIME;
+                    ByScoreListView.Visibility = Visibility.Collapsed;
                     viewModel.GetAllTimeLimitedGamesAsync();
                     break;
 
                 case "btn_ByScore":
                     BtnState = ButtonState.BY_SCORE;
+                    ByTimeListView.Visibility = Visibility.Collapsed;
                     viewModel.GetAllScoreLimitedGamesAsync();
                     break;
                 default:
@@ -78,7 +80,6 @@ namespace HockeyApp
                     if (BtnState == ButtonState.BY_SCORE)
                     {
                         ByScoreListView.Visibility = Visibility.Visible;
-                        ByTimeListView.Visibility = Visibility.Collapsed;
                     }
                     break;
                 case "TimeLimitedGames":
@@ -86,7 +87,6 @@ namespace HockeyApp
                     if (BtnState == ButtonState.BY_TIME)
                     {
                         ByTimeListView.Visibility = Visibility.Visible;
-                        ByScoreListView.Visibility = Visibility.Collapsed;
                     }
                     break;
                 default:
