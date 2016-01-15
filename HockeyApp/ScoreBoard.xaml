@@ -7,6 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" FontSize="32" Foreground="White">
 
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="ListItemHeaderStyle">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ListItemTextStyle">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="Black">
             <Grid.RowDefinitions>
@@ -54,9 +65,9 @@
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Rank"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
-                                    <TextBlock Grid.Column="1" Text="Player"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
-                                    <TextBlock Grid.Column="2" Text="Score"/>                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
+                                    <TextBlock Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
+                                    <TextBlock Grid.Column="1" Text="Player" Style="{StaticResource ListItemHeaderStyle}"/>
+                                    <TextBlock Grid.Column="2" Text="Score" Style="{StaticResource ListItemHeaderStyle}"/>
 
                                 </Grid>
                             </ListView.Header>
@@ -69,9 +80,9 @@
                                             <ColumnDefinition Width="3*"/>
                                             <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Path=Rank}" Foreground="White"/>                                        <!-- Style="{StaticResource PlayerRankTextStyle}"-->
-                                        <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1"/>                                        <!-- Style="{StaticResource ListItemTextStyle}"-->
-                                        <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2"/>                                        <!-- Style="{StaticResource ListItemTextStyle}" TextAlignment="Right"-->
+                                        <TextBlock Text="{Binding Path=Rank}" Foreground="White" Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1" Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2" Style="{StaticResource ListItemTextStyle}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -91,13 +102,9 @@
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="Rank"/>
-                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
-                                    <TextBlock Grid.Column="1" Text="Player"/>
-                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
-                                    <TextBlock Grid.Column="2" Text="Duration"/>
-                                    <!-- Style="{StaticResource ListItemHeaderStyle}"-->
-
+                                    <TextBlock Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
+                                    <TextBlock Grid.Column="1" Text="Player" Style="{StaticResource ListItemHeaderStyle}"/>
+                                    <TextBlock Grid.Column="2" Text="Duration" Style="{StaticResource ListItemHeaderStyle}"/>
                                 </Grid>
                             </ListView.Header>
 
@@ -109,12 +116,9 @@
                                             <ColumnDefinition Width="3*"/>
                                             <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Path=Rank}" Foreground="White"/>
-                                        <!-- Style="{StaticResource PlayerRankTextStyle}"-->
-                                        <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1"/>
-                                        <!-- Style="{StaticResource ListItemTextStyle}"-->
-                                        <TextBlock Text="{Binding Path=Duration}" Foreground="White" Grid.Column="2"/>
-                                        <!-- Style="{StaticResource ListItemTextStyle}" TextAlignment="Right"-->
+                                        <TextBlock Text="{Binding Path=Rank}" Foreground="White" Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1" Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Path=Duration}" Foreground="White" Grid.Column="2" Style="{StaticResource ListItemTextStyle}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
