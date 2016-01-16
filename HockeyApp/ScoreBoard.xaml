@@ -9,7 +9,7 @@
 
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="ListItemHeaderStyle">
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="SemiBold" />
@@ -66,11 +66,13 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="3*"></ColumnDefinition>
-                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
-                                        <TextBlock Grid.Column="1" Text="Player" Style="{StaticResource ListItemHeaderStyle}"/>
-                                        <TextBlock Grid.Column="2" Text="Score" Style="{StaticResource ListItemHeaderStyle}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
+                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="Name" Style="{StaticResource ListItemHeaderStyle}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource ListItemHeaderStyle}">Player<LineBreak/>Score</TextBlock>
+                                        <TextBlock Grid.Column="3" Style="{StaticResource ListItemHeaderStyle}">Robot<LineBreak/>Score</TextBlock>
 
                                     </Grid>
                                 </ListView.Header>
@@ -81,11 +83,13 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="{Binding Path=Rank}" Foreground="White" Style="{StaticResource ListItemTextStyle}"/>
                                             <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1" Style="{StaticResource ListItemTextStyle}"/>
                                             <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2" Style="{StaticResource ListItemTextStyle}"/>
+                                            <TextBlock Text="{Binding Path=RobotScore}" Foreground="White" Grid.Column="3" Style="{StaticResource ListItemTextStyle}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
