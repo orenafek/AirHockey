@@ -58,12 +58,14 @@ namespace HockeyApp
                 case "btn_ByTime":
                     BtnState = ButtonState.BY_TIME;
                     ByScoreListView.Visibility = Visibility.Collapsed;
+                    ByTimeListView.Visibility = Visibility.Collapsed;
                     viewModel.GetAllTimeLimitedGamesAsync();
                     break;
 
                 case "btn_ByScore":
                     BtnState = ButtonState.BY_SCORE;
                     ByTimeListView.Visibility = Visibility.Collapsed;
+                    ByScoreListView.Visibility = Visibility.Collapsed;
                     viewModel.GetAllScoreLimitedGamesAsync();
                     break;
                 default:
