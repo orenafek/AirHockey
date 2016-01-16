@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Networking;
+using Windows.Networking.Connectivity;
 namespace HockeyApp
 {
     using ViewModel;
@@ -45,7 +46,8 @@ namespace HockeyApp
             TERMINATE = 'T',
             GOAL_ROBOT = 'R',
             GOAL_PLAYER = 'P',
-            EMPTY = 'E'
+            EMPTY = 'E',
+            ALIVE = 'A'
         }
 
         static StreamSocket socket;
@@ -117,10 +119,22 @@ namespace HockeyApp
                 }
             }
         }
-        public static async Task ConnectToServer()
+        public static async Task<bool> ConnectToServer(Frame current)
         {
+
+            ConnectionProfile connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+            //if (connectionProfile == null || !connectionProfile.IsWlanConnectionProfile)
+            //{
+            //    MessageDialog msg = new MessageDialog("Please Enable WiFi", "Wifi Connection");
+            //    UICommand OK = new UICommand("OK");
+            //    Utils.Show(msg, new List<UICommand>() { OK });
+            //    current.Navigate(typeof(MainMenu), null);
+            //    return false;
+            //}
             await socket.ConnectAsync(host, port);
             Connected = true;
+            return true;
         }
         public static async void SendToServer(Command c,Frame current)
         {
@@ -131,14 +145,14 @@ namespace HockeyApp
                 await writer.StoreAsync();
             } catch(Exception ex)
             {
-                MessageDialog msgDialog = new MessageDialog("The Connection Has Been Closed.");
-                UICommand OK = new UICommand("OK");
-                OK.Invoked += (IUICommand command) =>
-                {
-                    Server.Dispose(); current.Navigate(typeof(MainMenu), null);
-                };
+                //MessageDialog msgDialog = new MessageDialog("The Connection Has Been Closed.");
+                //UICommand OK = new UICommand("OK");
+                //OK.Invoked += (IUICommand command) =>
+                //{
+                //    Server.Dispose(); current.Navigate(typeof(MainMenu), null);
+                //};
 
-                Utils.Show(msgDialog, new List<UICommand> { OK });
+                //Utils.Show(msgDialog, new List<UICommand> { OK });
             }
             
         }

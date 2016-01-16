@@ -21,6 +21,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using System.Threading.Tasks;
 using Windows.Networking;
+using Windows.System.Display;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,8 +37,7 @@ namespace HockeyApp
         private const int SCORE_LIMIT = 5;
         bool connected = false;
         bool paused = false;
-
-        
+        DisplayRequest request;
 
         private Server.Command command = Server.Command.EMPTY;
 
@@ -47,6 +47,7 @@ namespace HockeyApp
         public Game()
         {
             Server.Initiate(UpdateScore);
+            request = new DisplayRequest();
         }
 
         private string showTime()
@@ -66,7 +67,6 @@ namespace HockeyApp
 
         private void DispatcherTimer_Tick(object sender, object eo)
         {
-
             if(command != Server.Command.EMPTY)
             {
                 switch (command)
@@ -194,6 +194,8 @@ namespace HockeyApp
         {
             Params = e.Parameter as Session;
             this.InitializeComponent();
+            request.RequestActive();
+
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromMilliseconds(10);
@@ -217,10 +219,13 @@ namespace HockeyApp
             tb_RobotScore.Text = 0.ToString();
 
             //Connecting to the local Ad-Hock Wifi Server
-            await Server.ConnectToServer();
-            Server.SendToServer(Server.Command.START, Frame);
-            await Server.listenToPackets();
 
+            await Server.ConnectToServer(Frame);
+           
+                Server.SendToServer(Server.Command.START, Frame);
+                await Server.listenToPackets();
+            
+            
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -228,6 +233,7 @@ namespace HockeyApp
             stopGame(true);
             Server.Dispose();
             connected = false;
+            request.RequestRelease();
         }
 
         //private async void ReceiveStringLoop(DataReader chatReader)

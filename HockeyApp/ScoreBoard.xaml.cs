@@ -38,6 +38,7 @@ namespace HockeyApp
             await viewModel.GetAllScoreLimitedGamesAsync();
         }
 
+        
         private void btn_changeBy_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;

@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -56,7 +57,7 @@ namespace HockeyApp
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
                 return;
-
+            
             // Navigate back if possible, and if the event has not 
             // already been handled .
             if (rootFrame.CanGoBack && backRequestedEventArgs.Handled == false)
@@ -106,7 +107,7 @@ namespace HockeyApp
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
 
-
+           
             if (rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
