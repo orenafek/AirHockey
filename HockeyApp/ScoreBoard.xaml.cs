@@ -39,16 +39,19 @@ namespace HockeyApp
         {
             BtnState = ButtonState.NONE;
             viewModel.PropertyChanged += ShowTable;
+            viewModel.PropertyChanged += MakeButtonsVisible;
             this.InitializeComponent();
-            //viewModel.GetAllTimeLimitedGamesAsync();
             this.DataContext = viewModel;
         }
 
-        /*async protected override void OnNavigatedTo(NavigationEventArgs args)
+        protected override void OnNavigatedTo(NavigationEventArgs args)
         {
-            //await viewModel.GetAllTimeLimitedGamesAsync();
-            //await viewModel.GetAllScoreLimitedGamesAsync();
-        }*/
+            if (viewModel.IsPending)
+            {
+                btn_ByScore.Visibility = Visibility.Collapsed;
+                btn_ByTime.Visibility = Visibility.Collapsed;
+            }
+        }
 
         
         private void btn_changeBy_Click(object sender, RoutedEventArgs e)
@@ -97,6 +100,10 @@ namespace HockeyApp
             }
         }
 
-    
+        private void MakeButtonsVisible(object sender, PropertyChangedEventArgs e)
+        {
+            btn_ByTime.Visibility = Visibility.Visible;
+            btn_ByScore.Visibility = Visibility.Visible;
+        }
     }
 }
