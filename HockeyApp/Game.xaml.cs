@@ -147,7 +147,6 @@ namespace HockeyApp
             Timer.Stop();
             Server.SendToServer(Server.Command.TERMINATE,Frame);
 
-            //Bluetooth.Write(((char)Command.TERMINATE).ToString());
             if (!navigation)
             {
                 int playerScore = int.Parse(tb_UserScore.Text);
@@ -202,7 +201,8 @@ namespace HockeyApp
             Timer.Tick += DispatcherTimer_Tick;
             if (Params.ByTime)
             {
-                TimeSpaner = TimeSpan.FromMinutes(3);
+                //TimeSpaner = TimeSpan.FromMinutes(3);
+                TimeSpaner = TimeSpan.FromSeconds(45);
             }
 
             if (Params.ByScore)
@@ -236,48 +236,6 @@ namespace HockeyApp
             request.RequestRelease();
         }
 
-        //private async void ReceiveStringLoop(DataReader chatReader)
-        //{
-        //    try
-        //    {
-        //        uint size = await chatReader.LoadAsync(sizeof(uint));
-        //        if (size < sizeof(uint))
-        //        {
-        //            //Bluetooth.Disconnect("Remote device terminated connection");
-        //            return;
-        //        }
-
-        //        uint stringLength = chatReader.ReadUInt32();
-        //        uint actualStringLength = await chatReader.LoadAsync(stringLength);
-        //        if (actualStringLength != stringLength)
-        //        {
-        //            // The underlying socket was closed before we were able to read the whole data
-        //            return;
-        //        }
-
-        //        string a = chatReader.ReadString(stringLength);
-        //        Debug.Text = a;
-
-        //        ReceiveStringLoop(chatReader);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lock (this)
-        //        {
-        //            //if (!Bluetooth.isSocketOpen)
-        //            //{
-        //            //    // Do not print anything here -  the user closed the socket.
-        //            //    // HResult = 0x80072745 - catch this (remote device disconnect) ex = {"An established connection was aborted by the software in your host machine. (Exception from HRESULT: 0x80072745)"}
-        //            //}
-        //            //else
-        //            //{
-        //            //    Bluetooth.Disconnect("Read stream failed with error: " + ex.Message);
-        //            //}
-        //        }
-        //    }
-        //}
-
-       
 
     }
 }

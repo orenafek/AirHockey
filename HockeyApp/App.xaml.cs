@@ -60,10 +60,20 @@ namespace HockeyApp
             
             // Navigate back if possible, and if the event has not 
             // already been handled .
+
+            
             if (rootFrame.CanGoBack && backRequestedEventArgs.Handled == false)
             {
-                backRequestedEventArgs.Handled = true;
-                rootFrame.GoBack();
+                if (rootFrame.CurrentSourcePageType == typeof(ScoreBoard))
+                {
+                    backRequestedEventArgs.Handled = true;
+                    rootFrame.Navigate(typeof(MainMenu));
+                }
+                else
+                {
+                    backRequestedEventArgs.Handled = true;
+                    rootFrame.GoBack();
+                }
             }
         }
 

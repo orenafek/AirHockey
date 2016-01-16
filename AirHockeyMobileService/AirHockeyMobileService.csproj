@@ -275,6 +275,7 @@
     <Content Include="packages.config" />
     <Content Include="Performance\Microsoft.ServiceBus.MessagingPerformanceCounters.man" />
     <None Include="Properties\PublishProfiles\AirHockeyMobileService - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mobile-HockeyService %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mobile-HockeyService.pubxml" />
   </ItemGroup>
   <PropertyGroup>
