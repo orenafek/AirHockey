@@ -6,6 +6,7 @@ using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
 using AirHockeyMobileService.DataObjects;
 using AirHockeyMobileService.Models;
+using System.Web.Http.Description;
 
 namespace AirHockeyMobileService.Controllers
 {
@@ -38,6 +39,7 @@ namespace AirHockeyMobileService.Controllers
         }
 
         // POST tables/TimeLimitedGame
+        [ResponseType(typeof(TimeLimitedGame))]
         public async Task<IHttpActionResult> PostTimeLimitedGame(TimeLimitedGame item)
         {
             TimeLimitedGame current = await InsertAsync(item);
@@ -52,7 +54,7 @@ namespace AirHockeyMobileService.Controllers
             string command = System.String.Format(updateCommand, ServiceSettingsDictionary.GetSchemaName());
             await context.Database.ExecuteSqlCommandAsync(command);
 
-            return Ok();
+            return Ok(current);
         }
 
         // DELETE tables/TimeLimitedGame/48D68C86-6EA6-4C25-AA33-223FC9A27959
