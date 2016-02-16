@@ -57,13 +57,17 @@ namespace HockeyApp
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
                 return;
-            
+
             // Navigate back if possible, and if the event has not 
             // already been handled .
 
-            
+
             if (rootFrame.CanGoBack && backRequestedEventArgs.Handled == false)
             {
+                if (rootFrame.CurrentSourcePageType == typeof(MainMenu))
+                {
+                    this.Exit();
+                }
                 if (rootFrame.CurrentSourcePageType == typeof(ScoreBoard))
                 {
                     backRequestedEventArgs.Handled = true;

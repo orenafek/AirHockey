@@ -24,6 +24,7 @@ namespace HockeyApp
     /// </summary>
     public sealed partial class ScoreBoard : Page
     {
+        private Session Params { get; set; }
         ScoreboardViewModel viewModel = new ScoreboardViewModel(App.MobileService);
         public enum ButtonState
         {
@@ -46,6 +47,24 @@ namespace HockeyApp
 
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
+            Params = args.Parameter as Session;
+
+            if (Params != null)
+            {
+                BtnState = Params.ByScore ? ButtonState.BY_SCORE : ButtonState.BY_TIME;
+                if (!viewModel.IsPending)
+                {
+                    if (Params.ByScore)
+                    {
+                        viewModel.GetAllScoreLimitedGamesAsync();                    }
+
+                    if (Params.ByTime)
+                    {
+                        viewModel.GetAllTimeLimitedGamesAsync();
+                    }
+                }
+            }
+
             if (viewModel.IsPending)
             {
                 btn_ByScore.Visibility = Visibility.Collapsed;

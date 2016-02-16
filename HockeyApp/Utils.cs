@@ -54,7 +54,7 @@ namespace HockeyApp
         static DataReader reader;
         static DataWriter writer;
         static string port = "8001";
-        static string ip = "192.168.2.16";
+        static string ip = "192.168.8.250";
         static HostName host;
         public static bool Paused { get; set; }
         public delegate void ScoreUpdator(bool UserScored);

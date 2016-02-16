@@ -49,56 +49,57 @@
                             FontSize="20"  Padding="8,8,8,0" Margin="5,0" />
                 </StackPanel>
                 <Border Grid.Row="2" Grid.RowSpan="2">
-                    <Grid>
+                    <Grid Height="300">
                         <ProgressRing x:Name="ProgressRing1" Width="60" Height="60" IsActive="{Binding IsPending}"/>
                         <StackPanel>
                             <!-- Style="{StaticResource PanelStyle1}" Width="400-->
+                            <ScrollViewer x:Name="ByTimeListView" Height="250"  VerticalScrollBarVisibility="Hidden" Visibility="Collapsed">
+                                <ListView ItemsSource="{Binding TimeLimitedGames}"  SelectionMode="None">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
 
-                            <ListView x:Name="ByTimeListView" ItemsSource="{Binding TimeLimitedGames}" SelectionMode="None" Visibility="Collapsed">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-
-                                <ListView.Header>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="3*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock VerticalAlignment="Center" Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
-                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="Name" Style="{StaticResource ListItemHeaderStyle}"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource ListItemHeaderStyle}">Player<LineBreak/>Score</TextBlock>
-                                        <TextBlock Grid.Column="3" Style="{StaticResource ListItemHeaderStyle}">Robot<LineBreak/>Score</TextBlock>
-
-                                    </Grid>
-                                </ListView.Header>
-
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
+                                    <ListView.Header>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="3*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding Path=Rank}" Foreground="White" Style="{StaticResource ListItemTextStyle}"/>
-                                            <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1" Style="{StaticResource ListItemTextStyle}"/>
-                                            <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2" Style="{StaticResource ListItemTextStyle}"/>
-                                            <TextBlock Text="{Binding Path=RobotScore}" Foreground="White" Grid.Column="3" Style="{StaticResource ListItemTextStyle}"/>
+                                            <TextBlock VerticalAlignment="Center" Text="Rank" Style="{StaticResource ListItemHeaderStyle}"/>
+                                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="Name" Style="{StaticResource ListItemHeaderStyle}"/>
+                                            <TextBlock Grid.Column="2" Style="{StaticResource ListItemHeaderStyle}">Player<LineBreak/>Score</TextBlock>
+                                            <TextBlock Grid.Column="3" Style="{StaticResource ListItemHeaderStyle}">Robot<LineBreak/>Score</TextBlock>
+
                                         </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                    </ListView.Header>
 
-                            <ListView x:Name="ByScoreListView" ItemsSource="{Binding ScoreLimitedGames}" SelectionMode="None" Visibility="Collapsed">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Path=Rank}" Foreground="White" Style="{StaticResource ListItemTextStyle}"/>
+                                                <TextBlock Text="{Binding Path=Name}" Foreground="White" Grid.Column="1" Style="{StaticResource ListItemTextStyle}"/>
+                                                <TextBlock Text="{Binding Path=PlayerScore}" Foreground="White" Grid.Column="2" Style="{StaticResource ListItemTextStyle}"/>
+                                                <TextBlock Text="{Binding Path=RobotScore}" Foreground="White" Grid.Column="3" Style="{StaticResource ListItemTextStyle}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollViewer>
 
-                                <ListView.ItemContainerStyle>
+                            <ScrollViewer x:Name="ByScoreListView" Height="250"  VerticalScrollBarVisibility="Hidden" Visibility="Collapsed">
+                                <ListView ItemsSource="{Binding ScoreLimitedGames}" SelectionMode="None">
+                                    <ListView.ItemContainerStyle>
                                         <Style TargetType="ListViewItem">
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -133,7 +134,7 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
-
+                            </ScrollViewer>
                             <Button Content="Refresh" x:Name="RefreshRankings"/>
                         </StackPanel>
                     </Grid>

@@ -140,7 +140,7 @@ namespace HockeyApp
             //TODO: Insert new score to the DB
             Server.SendToServer(Server.Command.TERMINATE,Frame);
             Server.Dispose();
-            Frame.Navigate(typeof(ScoreBoard), null);
+            Frame.Navigate(typeof(ScoreBoard), Params);
         }
         private void stopGame(bool navigation)
         {
